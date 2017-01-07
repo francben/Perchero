@@ -20,12 +20,29 @@ namespace Perchero
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/lib/jquery/jquery.js",
+                      "~/lib/jquery-ui/jquery-ui.js",
+                      "~/lib/bootstrap/js/bootstrap.js",
+                      "~/lib/jquery-toggles/toggles.js",
+                      //"~/lib/morrisjs/morris.js",
+                      //"~/lib/raphael/raphael.js",
+                      //"~/lib/flot/jquery.flot.js",
+                      //"~/lib/flot/jquery.flot.resize.js",
+                      //"~/lib/flot-spline/jquery.flot.spline.js",
+                      //"~/lib/jquery-knob/jquery.knob.js",
+                      "~/Scripts/quirk.js"
+                      //"~/Scripts/dashboard.js"
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/lib/Hover/hover.css",
+                      "~/lib/bootstrap/css/bootstrap.css",
+                      "~/lib/fontawesome/css/font-awesome.css",
+                      "~/lib/weather-icons/css/weather-icons.css",
+                      "~/lib/ionicons/css/ionicons.css",
+                      "~/lib/jquery-toggles/toggles-full.css",
+                      //"~/lib/morrisjs/morris.css",
+                      "~/Content/quirk.css"));
         }
     }
 }
