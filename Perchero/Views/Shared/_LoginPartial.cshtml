@@ -1,9 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
+   
     <li>
         <div class="btn-group">
             <button type="button" class="btn btn-logged" data-toggle="dropdown">
@@ -19,5 +17,8 @@
             </ul>
         </div>
     </li>
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "hidden" }))
+    {
+        @Html.AntiForgeryToken()
     }
 }

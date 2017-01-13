@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Perchero.Models.ExpandedUserDTO>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="contentpanel">
+
+    <ol class="breadcrumb breadcrumb-quirk">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-home mr5"></i>Inicio</a></li>
+        <li class="active">Usuario</li>
+    </ol>
+
+    <div class="panel">
+        <div class="panel-heading">
+                <h4 class="panel-title">
+                    Usuarios del sistema
+                    <a class="btn btn-primary btn-quirk btn-stroke btn-xs" href="@Url.Action("Create","Admin")"><i class="glyphicon glyphicon-plus"></i></a>
+                    <a class="btn btn-info btn-quirk btn-stroke btn-xs" href="@Url.Action("VieWAllRoles","Admin")"><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a class="btn btn-default btn-quirk btn-stroke btn-xs" href="@Url.Action("../","Home")"><i class="glyphicon glyphicon-arrow-left"></i></a>
+                </h4>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+
+                <div class="content-page">
+                    <div class="content">
+                        
+                        <table id="dataTable1" class="table table-bordered table-striped-col">
+                            <tr>
+                                <th>
+                                    Correo
+                                </th>
+                                <th>
+                                    Opciones
+                                </th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Editar", "EditUser", new { UserName = item.UserName }) |
+                                        @if ((item.UserName.ToLower() != this.User.Identity.Name.ToLower()))
+                                        {
+                                            @Html.ActionLink("Borrar", "DeleteUser", new { UserName = item.UserName },
+                    new { onclick = "return confirm('Estas seguro que desear borrar el usuario?');" })
+                                        }
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

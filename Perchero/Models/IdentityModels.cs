@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations;
 
 namespace Perchero.Models
 {
@@ -16,6 +17,19 @@ namespace Perchero.Models
             // Agregar aquí notificaciones personalizadas de usuario
             return userIdentity;
         }
+
+        [Required(ErrorMessage = "Este campo es requerido")]
+        public string Nombre { get; set; }
+        [Required(ErrorMessage = "Este campo es requerido")]
+        public string Apellido { get; set; }
+        [Required(ErrorMessage = "Este campo es requerido")]
+        public string Direccion { get; set; }
+        [Required(ErrorMessage = "Este campo es requerido")]
+        public string Telefono { get; set; }
+        public string Empresa { get; set; }
+        [DataType(DataType.ImageUrl)]
+        public string Imagen { get; set; }
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
