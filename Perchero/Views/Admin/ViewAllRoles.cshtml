@@ -2,66 +2,67 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="content-page">
-    <ol class="breadcrumb">
-        <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+<div class="contentpanel">
+
+    <ol class="breadcrumb breadcrumb-quirk">
+        <li>
+            <a href="@Url.Action("Index","Home")"><i class="fa fa-home mr5"></i>Inicio</a>
+        </li>
         <li><a href="@Url.Action("Index","Admin")">Usuario</a></li>
         <li class="active">Roles</li>
     </ol>
-    <!-- Start Content here -->
-    <div class="content">
-        <br />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <p>
 
-            <a class="btn btn-green-2" href="@Url.Action("AddRole","Admin")"><i class="fa fa-plus-square"></i> Nuevo</a>
-            <a class="btn btn-darkblue-3" href="@Url.Action("Index","Admin")"><i class="fa fa-mail-reply"></i> Volver</a>
-        </p>
-        <table class="table">
-            <tr>
-                <th>
-                    Roles
-                </th>
-                <th></th>
-            </tr>
+    <div class="panel">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                Roles
+                <a class="btn btn-primary btn-quirk btn-stroke btn-xs" href="@Url.Action("AddRole", "Admin")"><i class="glyphicon glyphicon-plus"></i></a>
+                <a class="btn btn-default btn-quirk btn-stroke btn-xs" href="@Url.Action("Index", "Admin")"><i class="glyphicon glyphicon-arrow-left"></i></a>
+            </h4>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RoleName)
-                    </td>
-                    <td>
-                        @if (item.RoleName.ToLower() != "administrador")
-                        {
-                            @Html.ActionLink("Editar", "EditRoles",
-                   new { RoleName = item.RoleName })
-                        }
-                    </td>
-                    <td>
-                        @if (item.RoleName.ToLower() != "administrador")
-                        {
-                            @Html.ActionLink("Eliminar", "DeleteUserRole",
-                   new { RoleName = item.RoleName },
-                   new
-                   {
-                       onclick =
-                   "return confirm('Esta seguro de que desea eliminar el rol?');"
-                   })
-                        }
-                    </td>
+                <div class="content-page">
+                    <div class="content">
 
-                </tr>
-            }
-        </table>
-        <footer>
-            Dianasys &copy; 2016
-            <div class="footer-links pull-right">
-                <a href="#">Soporte</a>
-                <a href="#">Ayuda</a>
-                <a href="#">Contactos</a>
+                        <table id="dataTable1" class="table table-bordered table-striped-col">
+                            <tr>
+                                <th>
+                                    Roles
+                                </th>
+                                <th>Opciones</th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RoleName)
+                                    </td>
+                                    <td>
+                                        @if (item.RoleName.ToLower() != "administrador")
+                                        {
+                                            <a class="btn btn-warning btn-quirk btn-fill btn-xs" href="@Url.Action("EditRoles", "Admin",
+                   new { RoleName = item.RoleName })"><i class="glyphicon glyphicon-pencil"></i></a>
+                                        }
+                                        @if (item.RoleName.ToLower() != "administrador")
+                                        {
+                                            <a class="btn btn-danger btn-quirk btn-fill btn-xs" href="@Url.Action("DeleteUserRole", "Admin",
+                   new { RoleName = item.RoleName })"><i class="glyphicon glyphicon-trash"></i></a>
+                                           
+                                        }
+                                    </td>
+
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
             </div>
-        </footer>
+        </div>
     </div>
 </div>
+
 

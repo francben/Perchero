@@ -6,80 +6,61 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="content-page">
-        <ol class="breadcrumb">
-            <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+    <div class="contentpanel">
+
+        <ol class="breadcrumb breadcrumb-quirk">
+            <li>
+                <a href="@Url.Action("Index","Home")"><i class="fa fa-home mr5"></i>Inicio</a>
+            </li>
             <li><a href="@Url.Action("Index","Admin")">Usuario</a></li>
-            <li class="active">Editar Usario</li>
+            <li class="active">Editar Usuario</li>
         </ol>
-        <!-- Start Content here -->
-        <div class="content">
-            <div class="form-horizontal">
-                <h4>Edit User</h4>
-                @Html.ValidationSummary(true,
-       "",
-       new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(model => model.UserName,
-           htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DisplayFor(model => model.UserName,
-               new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.UserName, "",
-               new { @class = "text-danger" })
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Email,
-           htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Email,
-               new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Email,
-               "",
-               new { @class = "text-danger" })
-                    </div>
-                </div>
+        <div class="panel">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Editar Usuario
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div class="content-page">
+                    <div class="content form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Password,
-           htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(model => model.Password,
-               new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Password,
-               "",
-               new { @class = "text-danger" })
-                    </div>
-                </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-11">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-                <div class="form-group hidden">
-                    @Html.LabelFor(model => model.LockoutEndDateUtc,
-           htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DisplayFor(model => model.LockoutEndDateUtc,
-               new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-11">
+                                @Html.PasswordFor(model => model.Password,  new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <button type="submit" class="btn btn-blue-2"><i class="fa fa-save"></i> Guardar</button>
-                        <a class="btn btn-orange-1" href="@Url.Action("EditRoles", "Admin", new { UserName = Model.UserName })"><i class="fa fa-edit"></i> Editar Roles</a>
-                        @*@Html.ActionLink("Editar Roles", "EditRoles", new { UserName = Model.UserName }, new { @class = "btn btn-orange-1" })*@
-                        <a class="btn btn-darkblue-3" href="@Url.Action("Index","Admin")"><i class="fa fa-mail-reply"></i> Volver</a>
+                        <div class="form-group hidden">
+                            @Html.LabelFor(model => model.LockoutEndDateUtc, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => model.LockoutEndDateUtc, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="submit" class="btn btn-blue-2"><i class="fa fa-save"></i> Guardar</button>
+                                <a class="btn btn-orange-1" href="@Url.Action("EditRoles", "Admin", new { UserName = Model.UserName })"><i class="fa fa-edit"></i> Editar Roles</a>
+                                @*@Html.ActionLink("Editar Roles", "EditRoles", new { UserName = Model.UserName }, new { @class = "btn btn-orange-1" })*@
+                                <a class="btn btn-darkblue-3" href="@Url.Action("Index","Admin")"><i class="fa fa-mail-reply"></i> Volver</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <footer>
-                Dianasys &copy; 2016
-                <div class="footer-links pull-right">
-                    <a href="#">Soporte</a>
-                    <a href="#">Ayuda</a>
-                    <a href="#">Contactos</a>
-                </div>
-            </footer>
         </div>
     </div>
 }
