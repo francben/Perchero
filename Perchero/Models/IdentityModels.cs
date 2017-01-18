@@ -43,5 +43,19 @@ namespace Perchero.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Perchero.Models.Tela> Telas { get; set; }
+
+        public System.Data.Entity.DbSet<Perchero.Models.Tipo> Tipoes { get; set; }
+
+        public System.Data.Entity.DbSet<Perchero.Models.Avio> Avios { get; set; }
+
+        public System.Data.Entity.DbSet<Perchero.Models.Prenda> Prendas { get; set; }
+
+        //public System.Data.Entity.DbSet<Perchero.Models.ApplicationUser> ApplicationUsers { get; set; }
+
+        public System.Data.Entity.DbSet<Perchero.Models.DetallePrenda> DetallePrendas { get; set; }
+
+        public System.Data.Entity.DbSet<Perchero.Models.Pedido> Pedidoes { get; set; }
     }
 }

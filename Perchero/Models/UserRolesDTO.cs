@@ -17,6 +17,18 @@ namespace Perchero.Models
         public DateTime? LockoutEndDateUtc { get; set; }
         public int AccessFailedCount { get; set; }
         public string PhoneNumber { get; set; }
+
+        [Required(ErrorMessage = "Este campo es requerido")]
+        public string Nombre { get; set; }
+        [Required(ErrorMessage = "Este campo es requerido")]
+        public string Apellido { get; set; }
+        [Required(ErrorMessage = "Este campo es requerido")]
+        public string Direccion { get; set; }
+        [Required(ErrorMessage = "Este campo es requerido")]
+        public string Telefono { get; set; }
+        public string Empresa { get; set; }
+        [DataType(DataType.ImageUrl)]
+        public string Imagen { get; set; }
         public IEnumerable<UserRolesDTO> Roles { get; set; }
     }
 

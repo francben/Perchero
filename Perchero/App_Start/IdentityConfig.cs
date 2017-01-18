@@ -88,7 +88,7 @@ namespace Perchero
         }
     }
 
-    // Configure el administrador de inicios de sesión que se usa en esta aplicación.
+    // Configure the application sign-in manager which is used in this application.
     public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)

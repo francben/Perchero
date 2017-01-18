@@ -30,7 +30,28 @@
                         <table id="dataTable1" class="table table-bordered table-striped-col">
                             <tr>
                                 <th>
+                                    Nombre
+                                </th>
+                                <th>
+                                    Apellido
+                                </th>
+                                <th>
+                                    Imagen
+                                </th>
+                                <th>
+                                    Direccion
+                                </th>
+                                <th>
+                                    Telefono
+                                </th>
+                                <th>
+                                    Empresa
+                                </th>
+                                <th>
                                     Correo
+                                </th>
+                                <th>
+                                    Rol
                                 </th>
                                 <th>
                                     Opciones
@@ -41,7 +62,28 @@
                             {
                                 <tr>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Apellido)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Imagen)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Direccion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Telefono)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Empresa)
+                                    </td>
+                                    <td>
                                         @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                       
                                     </td>
                                     <td>
                                         @Html.ActionLink("Editar", "EditUser", new { UserName = item.UserName }) |

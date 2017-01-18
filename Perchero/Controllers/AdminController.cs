@@ -22,73 +22,34 @@ namespace Perchero.Controllers
         // Controllers
 
         // GET: /Admin/
+        #region public ActionResult Index()
         [Authorize(Roles = "Administrador")]
-        #region public ActionResult Index(string searchStringUserNameOrEmail)
-        public ActionResult Index(string searchStringUserNameOrEmail, string currentFilter, int? page)
+        public ActionResult Index()
         {
-            try
+            List<ExpandedUserDTO> col_Usuario = new List<ExpandedUserDTO>();
+            var result = UserManager.Users.ToList().OrderBy(x => x.Email);
+            foreach (var item in result)
             {
-                int intPage = 1;
-                int intPageSize = 5;
-                int intTotalPageCount = 0;
+                ExpandedUserDTO objUsuario = new ExpandedUserDTO();
 
-                if (searchStringUserNameOrEmail != null)
-                {
-                    intPage = 1;
-                }
-                else
-                {
-                    if (currentFilter != null)
-                    {
-                        searchStringUserNameOrEmail = currentFilter;
-                        intPage = page ?? 1;
-                    }
-                    else
-                    {
-                        searchStringUserNameOrEmail = "";
-                        intPage = page ?? 1;
-                    }
-                }
+                objUsuario.UserName = item.UserName;
+                objUsuario.Nombre = item.Nombre;
+                objUsuario.Apellido = item.Apellido;
+                objUsuario.Nombre = item.Nombre;
+                objUsuario.Apellido = item.Apellido;
+                objUsuario.Imagen = item.Imagen;
+                objUsuario.Direccion = item.Direccion;
+                objUsuario.Telefono = item.Telefono;
+                objUsuario.Empresa = item.Empresa;
+                objUsuario.Email = item.Email;
+                objUsuario.LockoutEndDateUtc = item.LockoutEndDateUtc;
+                objUsuario.PhoneNumber = item.PhoneNumber;
 
-                ViewBag.CurrentFilter = searchStringUserNameOrEmail;
-
-                List<ExpandedUserDTO> col_UserDTO = new List<ExpandedUserDTO>();
-                int intSkip = (intPage - 1) * intPageSize;
-
-                intTotalPageCount = UserManager.Users
-                    .Where(x => x.UserName.Contains(searchStringUserNameOrEmail))
-                    .Count();
-
-                var result = UserManager.Users
-                    .Where(x => x.UserName.Contains(searchStringUserNameOrEmail))
-                    .OrderBy(x => x.UserName)
-                    .Skip(intSkip)
-                    .Take(intPageSize)
-                    .ToList();
-
-                foreach (var item in result)
-                {
-                    ExpandedUserDTO objUserDTO = new ExpandedUserDTO();
-
-                    objUserDTO.UserName = item.UserName;
-                    objUserDTO.Email = item.Email;
-                    objUserDTO.LockoutEndDateUtc = item.LockoutEndDateUtc;
-
-                    col_UserDTO.Add(objUserDTO);
-                }
-
-
-
-                return View(col_UserDTO);
+                col_Usuario.Add(objUsuario);
             }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, "Error: " + ex);
-                List<ExpandedUserDTO> col_UserDTO = new List<ExpandedUserDTO>();
-
-                return View(col_UserDTO);
-            }
+            return View(col_Usuario);
         }
+
         #endregion
 
         // Users *****************************
@@ -124,6 +85,13 @@ namespace Perchero.Controllers
                 var UserName = paramExpandedUserDTO.Email.Trim();
                 var Password = paramExpandedUserDTO.Password.Trim();
 
+                var Nombre = paramExpandedUserDTO.Nombre.Trim();
+                var Apellido = paramExpandedUserDTO.Apellido.Trim();
+                var Direccion = paramExpandedUserDTO.Direccion.Trim();
+                var Telefono = paramExpandedUserDTO.Telefono.Trim();
+                var Empresa = paramExpandedUserDTO.Empresa.Trim();
+                var Imagen = paramExpandedUserDTO.Imagen.Trim();
+
                 if (Email == "")
                 {
                     throw new Exception("No Email");
@@ -139,7 +107,7 @@ namespace Perchero.Controllers
 
                 // Create user
 
-                var objNewAdminUser = new ApplicationUser { UserName = UserName, Email = Email };
+                var objNewAdminUser = new ApplicationUser { UserName = UserName, Email = Email, Nombre = Nombre, Apellido = Apellido, Direccion = Direccion, Telefono = Telefono, Empresa = Empresa, Imagen = Imagen };
                 var AdminUserCreateResult = UserManager.Create(objNewAdminUser, Password);
 
                 if (AdminUserCreateResult.Succeeded == true)
@@ -615,9 +583,14 @@ namespace Perchero.Controllers
 
             objExpandedUserDTO.UserName = result.UserName;
             objExpandedUserDTO.Email = result.Email;
+            objExpandedUserDTO.Nombre = result.Nombre;
+            objExpandedUserDTO.Apellido = result.Apellido;
+            objExpandedUserDTO.Direccion = result.Direccion;
+            objExpandedUserDTO.Imagen = result.Imagen;
+            objExpandedUserDTO.Telefono = result.Telefono;
+            objExpandedUserDTO.Empresa = result.Empresa;
             objExpandedUserDTO.LockoutEndDateUtc = result.LockoutEndDateUtc;
             objExpandedUserDTO.AccessFailedCount = result.AccessFailedCount;
-            objExpandedUserDTO.PhoneNumber = result.PhoneNumber;
 
             return objExpandedUserDTO;
         }
@@ -635,6 +608,11 @@ namespace Perchero.Controllers
                 throw new Exception("Could not find the User");
             }
 
+            result.Nombre = paramExpandedUserDTO.Nombre;
+            result.Apellido = paramExpandedUserDTO.Apellido;
+            result.Direccion = paramExpandedUserDTO.Direccion;
+            result.Telefono = paramExpandedUserDTO.Telefono;
+            result.Empresa = paramExpandedUserDTO.Empresa;
             result.Email = paramExpandedUserDTO.Email;
 
             // Lets check if the account needs to be unlocked
@@ -644,30 +622,18 @@ namespace Perchero.Controllers
                 UserManager.ResetAccessFailedCountAsync(result.Id);
             }
 
-            UserManager.Update(result);
+            IdentityResult estado = UserManager.Update(result);
 
-            // Was a password sent across?
-            if (!string.IsNullOrEmpty(paramExpandedUserDTO.Password))
+            if (estado.Succeeded)
             {
-                // Remove current password
-                var removePassword = UserManager.RemovePassword(result.Id);
-                if (removePassword.Succeeded)
+                IdentityResult cambiar = UserManager.ChangePassword(result.Id, paramExpandedUserDTO.Password, paramExpandedUserDTO.Password);
+                if (cambiar.Errors.Count() > 0)
                 {
-                    // Add new password
-                    var AddPassword =
-                        UserManager.AddPassword(
-                            result.Id,
-                            paramExpandedUserDTO.Password
-                            );
-
-                    if (AddPassword.Errors.Count() > 0)
-                    {
-                        throw new Exception(AddPassword.Errors.FirstOrDefault());
-                    }
+                    throw new Exception(cambiar.Errors.FirstOrDefault());
                 }
+                return paramExpandedUserDTO;
             }
-
-            return paramExpandedUserDTO;
+            throw new Exception("No se realizo ningun cambio!");
         }
         #endregion
 
