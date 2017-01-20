@@ -685,6 +685,7 @@ namespace Perchero.Controllers
         }
         #endregion
 
+
         #region private List<string> RolesUserIsNotIn(string UserName)
         private List<string> RolesUserIsNotIn(string UserName)
         {
@@ -697,7 +698,7 @@ namespace Perchero.Controllers
             // If we could not find the user, throw an exception
             if (user == null)
             {
-                throw new Exception("Could not find the User");
+                throw new Exception("No se pudo encontrar el usuario");
             }
 
             var colRolesForUser = UserManager.GetRoles(user.Id).ToList();
@@ -707,7 +708,7 @@ namespace Perchero.Controllers
 
             if (colRolesUserInNotIn.Count() == 0)
             {
-                colRolesUserInNotIn.Add("No Roles Found");
+                colRolesUserInNotIn.Add("No se encontraron roles");
             }
 
             return colRolesUserInNotIn;

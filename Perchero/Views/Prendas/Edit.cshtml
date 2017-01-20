@@ -1,5 +1,6 @@
 ﻿@model Perchero.Models.Prenda
 
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 @{
     ViewBag.Title = "Edit";
 }
@@ -10,7 +11,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Prenda</h4>
         <hr />
@@ -74,11 +75,40 @@
                 @Html.ValidationMessageFor(model => model.PrecioTotal, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        @{
+    var i = 0;
+    foreach (var item in Model.DetallePrendas)
+    {
+        <div class="form-group col-lg-12">
+            @Html.HiddenFor(model => item.PrendaId, new { value = Model.Id, Name = "DetallePrendas[" + @i + "].PrendaId" })
+            @Html.HiddenFor(model => item.Id, new { value = Model.Id, Name = "DetallePrendas[" + @i + "].Id" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(modelItem => item.TelaId, new SelectList(ViewBag.TelaId, "Value", "Text", item.TelaId), "Seleccionar Tela", htmlAttributes: new { @class = "form-control", Name = "DetallePrendas[" + @i + "].TelaId", id = "DetallePrendas[" + @i + "].TelaId" })
+                
             </div>
+            <div class="col-md-2">
+                @Html.EditorFor(model => item.MetroTela, new { htmlAttributes = new { @class = "form-control", Name = "DetallePrendas[" + @i + "].MetroTela", id = "DetallePrendas[" + @i + "].MetroTela" } })
+            </div>
+
+            <div class="col-md-3">
+                @Html.DropDownListFor(modelItem => item.AvioId, new SelectList(ViewBag.AvioId, "Value", "Text", item.AvioId), "Seleccionar Avio", htmlAttributes: new { @class = "form-control", Name = "DetallePrendas[" + @i + "].AvioId", id = "DetallePrendas[" + @i + "].AvioId" })
+            </div>
+            <div class="col-md-2">
+                @Html.EditorFor(model => item.CantidadAvio, new { htmlAttributes = new { @class = "form-control", Name = "DetallePrendas[" + @i + "].CantidadAvio", id = "DetallePrendas[" + @i + "].CantidadAvio" } })
+            </div>
+            <div class="col-md-2">
+                <span class="btn btn-danger btn-block delete">
+                    <i class="fa fa-trash" id=""> </i>
+                </span>
+            </div>
+        </div>
+        i++;
+    }
+}
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>
 }
@@ -86,7 +116,4 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+               

@@ -17,7 +17,7 @@ namespace Perchero.Controllers
         // GET: DetallePrendas
         public ActionResult Index()
         {
-            var detallePrendas = db.DetallePrendas.Include(d => d.Prenda);
+            var detallePrendas = db.DetallePrendas.Include(d => d.Avio).Include(d => d.Prenda).Include(d => d.Tela);
             return View(detallePrendas.ToList());
         }
 
@@ -39,7 +39,9 @@ namespace Perchero.Controllers
         // GET: DetallePrendas/Create
         public ActionResult Create()
         {
+            ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre");
             ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId");
+            ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre");
             return View();
         }
 
@@ -48,7 +50,7 @@ namespace Perchero.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PrendaId,MetroTela,CantidadAvio")] DetallePrenda detallePrenda)
+        public ActionResult Create([Bind(Include = "Id,PrendaId,AvioId,TelaId,MetroTela,CantidadAvio")] DetallePrenda detallePrenda)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +59,9 @@ namespace Perchero.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre", detallePrenda.AvioId);
             ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId", detallePrenda.PrendaId);
+            ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre", detallePrenda.TelaId);
             return View(detallePrenda);
         }
 
@@ -73,7 +77,9 @@ namespace Perchero.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre", detallePrenda.AvioId);
             ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId", detallePrenda.PrendaId);
+            ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre", detallePrenda.TelaId);
             return View(detallePrenda);
         }
 
@@ -82,7 +88,7 @@ namespace Perchero.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PrendaId,MetroTela,CantidadAvio")] DetallePrenda detallePrenda)
+        public ActionResult Edit([Bind(Include = "Id,PrendaId,AvioId,TelaId,MetroTela,CantidadAvio")] DetallePrenda detallePrenda)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +96,9 @@ namespace Perchero.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre", detallePrenda.AvioId);
             ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId", detallePrenda.PrendaId);
+            ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre", detallePrenda.TelaId);
             return View(detallePrenda);
         }
 

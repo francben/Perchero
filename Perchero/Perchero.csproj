@@ -183,6 +183,10 @@
     <Compile Include="Migrations\201701180108436_DetallePrendas.Designer.cs">
       <DependentUpon>201701180108436_DetallePrendas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701190251239_ActualizarPrenda.cs" />
+    <Compile Include="Migrations\201701190251239_ActualizarPrenda.Designer.cs">
+      <DependentUpon>201701190251239_ActualizarPrenda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Avio.cs" />
@@ -210,6 +214,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.addfield.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -290,6 +295,7 @@
     <Content Include="Views\Pedidoes\Details.cshtml" />
     <Content Include="Views\Pedidoes\Edit.cshtml" />
     <Content Include="Views\Pedidoes\Index.cshtml" />
+    <Content Include="Views\Shared\_ModalDetallePrendas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -310,6 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701180108436_DetallePrendas.resx">
       <DependentUpon>201701180108436_DetallePrendas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701190251239_ActualizarPrenda.resx">
+      <DependentUpon>201701190251239_ActualizarPrenda.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

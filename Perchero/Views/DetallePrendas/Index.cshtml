@@ -15,7 +15,13 @@
             @Html.DisplayNameFor(model => model.Prenda.UserId)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Tela.Nombre)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.MetroTela)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Avio.Nombre)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CantidadAvio)
@@ -26,10 +32,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Prenda.UserId)
+            @Html.DisplayFor(modelItem => item.Prenda.Usuario.Nombre) @Html.DisplayFor(modelItem => item.Prenda.Usuario.Apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tela.Nombre)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.MetroTela)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Avio.Nombre)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CantidadAvio)

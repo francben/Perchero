@@ -41,6 +41,10 @@ namespace Perchero.Controllers
         {
             ViewBag.TipoId = new SelectList(db.Tipoes, "Id", "Nombre");
             ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre");
+
+            ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre");
+            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId");
+            ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre");
             return View();
         }
 
@@ -49,7 +53,7 @@ namespace Perchero.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserId,TipoId,Nombre,Imagen,Talle,Vitrina,PrecioTotal")] Prenda prenda)
+        public ActionResult Create(Prenda prenda)
         {
             if (ModelState.IsValid)
             {
@@ -60,6 +64,10 @@ namespace Perchero.Controllers
 
             ViewBag.TipoId = new SelectList(db.Tipoes, "Id", "Nombre", prenda.TipoId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre", prenda.UserId);
+
+            ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre");
+            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId");
+            ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre");
             return View(prenda);
         }
 
@@ -77,24 +85,52 @@ namespace Perchero.Controllers
             }
             ViewBag.TipoId = new SelectList(db.Tipoes, "Id", "Nombre", prenda.TipoId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre", prenda.UserId);
+
+            ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre");
+            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId");
+            ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre");
             return View(prenda);
         }
+
+
 
         // POST: Prendas/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserId,TipoId,Nombre,Imagen,Talle,Vitrina,PrecioTotal")] Prenda prenda)
+        public ActionResult Edit(Prenda prenda)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(prenda).State = EntityState.Modified;
                 db.SaveChanges();
+                using (var contexto = new ApplicationDbContext())
+                {
+                    foreach (var item in prenda.DetallePrendas)
+                    {
+                        var detalles = new DetallePrenda()
+                        {
+                            Id = item.Id,
+                            AvioId = item.AvioId,
+                            CantidadAvio = item.CantidadAvio,
+                            MetroTela = item.MetroTela,
+                            PrendaId = item.PrendaId,
+                            TelaId = item.TelaId
+                        };
+                        contexto.DetallePrendas.Add(detalles);
+                        contexto.Entry(detalles).State = EntityState.Modified;
+                        contexto.SaveChanges();
+                    }
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.TipoId = new SelectList(db.Tipoes, "Id", "Nombre", prenda.TipoId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre", prenda.UserId);
+
+            ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre");
+            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId");
+            ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre");
             return View(prenda);
         }
 

@@ -68,6 +68,33 @@
 
     </dl>
 </div>
+
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Tela</th>
+            <th>Metro</th>
+            <th>Avio</th>
+            <th>Cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model.DetallePrendas)
+            {
+                <tr>
+                    <td>@item.Tela.Nombre</td>
+                    <td>@item.MetroTela</td>
+                    <td>@item.Avio.Nombre</td>
+                    <td>@item.CantidadAvio</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

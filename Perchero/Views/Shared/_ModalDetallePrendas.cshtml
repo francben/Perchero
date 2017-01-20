@@ -1,0 +1,65 @@
+﻿<div class="widget-content padding">
+    <label class="col-lg-4">Tela</label>
+    <label id="tt"></label>
+    @*tela*@
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#Tela">
+        Agregar Tela
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="Tela" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">
+                        Agregar Telas
+                        <div class="pull-right">
+                            <div id="sheepItForm_controls" class="btn btn-primary">
+                                <div id="sheepItForm_add">
+                                    <span>
+                                        <i class="fa fa-plus" id="agt"> Agregar tela</i>
+                                    </span>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="lst">Listo</button>
+                        </div>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div id="sheepItForm">
+                        <div id="sheepItForm_template" class="form-group col-lg-12">
+                            @*<label class="control-label col-lg-12" for="sheepItForm_#index#_tela">Telas <span id="sheepItForm_label"></span></label>*@
+                            <div class="col-md-3">
+                                @*@Html.EditorFor(model => model., new { htmlAttributes = new { @class = "form-control Tela_Nombre" } })*@
+                                @Html.DropDownList("TelaId", null, "Selecionar tela", htmlAttributes: new { @id = "sheepItForm_#index#_tela", @class = "form-control", Name = "DetallePrendas[#index#].TelaId" })
+
+                            </div>
+                            <div class="col-md-2">
+                                <input type="number" name="DetallePrendas[#index#].MetroTela" class="form-control" placeholder="Metros" id="sheepItForm_#index#_metros" />
+                            </div>
+
+                            @*<label class="col-md-2 control-label" for="sheepItForm2_#index#_avio">Avios <span id="sheepItForm2_label"></span></label>*@
+                            <div class="col-md-3">
+                                @*@Html.EditorFor(model => model., new { htmlAttributes = new { @class = "form-control Tela_Nombre" } })*@
+                                @Html.DropDownList("AvioId", null, "Selecionar Avio", htmlAttributes: new { @id = "sheepItForm_#index#_avio", @class = "form-control", Name = "DetallePrendas[#index#].AvioId" })
+
+                            </div>
+                            <div class="col-md-2">
+                                <input type="number" name="DetallePrendas[#index#].CantidadAvio" class="form-control" placeholder="Cantidad" id="sheepItForm_#index#_cantidad" />
+                            </div>
+                            <div class="col-md-2">
+                                <span class="btn btn-danger btn-block delete">
+                                    <i class="fa fa-trash" id="sheepItForm_remove_current"> </i>
+                                </span>
+                            </div>
+                        </div>
+                        <div id="sheepItForm_noforms_template"></div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="border:none;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>

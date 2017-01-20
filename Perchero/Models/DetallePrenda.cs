@@ -10,21 +10,23 @@ namespace Perchero.Models
 {
     public class DetallePrenda
     {
-        public DetallePrenda() {
-            Avios = new List<Avio>();
-            Telas = new List<Tela>();
-        }
         [HiddenInput(DisplayValue = true)]
         public int Id { get; set; }
         public int PrendaId { get; set; }
         [ForeignKey("PrendaId")]
         public virtual Prenda Prenda { get; set; }
+
+        public int AvioId { get; set; }
+        [ForeignKey("AvioId")]
+        public virtual Avio Avio { get; set; }
+
+        public int TelaId { get; set; }
+        [ForeignKey("TelaId")]
+        public virtual Tela Tela { get; set; }
+
         [Required(ErrorMessage = "Este campo es requerido")]
         public Double MetroTela { get; set; }
         [Required(ErrorMessage = "Este campo es requerido")]
         public int CantidadAvio { get; set; }
-        public virtual ICollection<Avio> Avios { get; set; }
-        [Required(ErrorMessage = "Este campo es requerido")]
-        public virtual ICollection<Tela> Telas { get; set; }
     }
 }
