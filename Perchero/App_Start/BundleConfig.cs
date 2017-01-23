@@ -30,6 +30,10 @@ namespace Perchero
                       //"~/lib/flot/jquery.flot.resize.js",
                       //"~/lib/flot-spline/jquery.flot.spline.js",
                       //"~/lib/jquery-knob/jquery.knob.js",
+                      "~/Scripts/bootstrap.file-input.js",
+                      "~/Scripts/fileinput.min.js",
+                      "~/Scripts/jquery.fileupload.js",
+                      "~/Scripts/jquery.magnific-popup.min.js",
                       "~/Scripts/quirk.js"
                       //"~/Scripts/dashboard.js"
                       ));
@@ -41,6 +45,7 @@ namespace Perchero
                       "~/lib/weather-icons/css/weather-icons.css",
                       "~/lib/ionicons/css/ionicons.css",
                       "~/lib/jquery-toggles/toggles-full.css",
+                      "~/Content/magnific-popup.css",
                       //"~/lib/morrisjs/morris.css",
                       "~/Content/quirk.css"));
         }
