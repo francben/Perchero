@@ -1,91 +1,177 @@
 ﻿@model Perchero.Models.Prenda
-
 @{
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
-
-
 @using (Html.BeginForm("Create", "Prendas", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    <div class="contentpanel">
 
-    <div class="form-horizontal">
-        <h4>Prenda</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("UserId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+        <ol class="breadcrumb breadcrumb-quirk">
+            <li>
+                <a href="@Url.Action("Index","Home")"><i class="fa fa-home mr5"></i>Crear Prenda</a>
+            </li>
+            <li><a href="@Url.Action("Index","Prendas")">Prenda</a></li>
+            <li class="active">Crear Prenda</li>
+        </ol>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Crear Prenda
+                </h4>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TipoId, "TipoId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("TipoId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TipoId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Imagen, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                @Html.ValidationMessageFor(model => model.Imagen, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Talle, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Talle, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Talle, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Vitrina, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Vitrina)
-                    @Html.ValidationMessageFor(model => model.Vitrina, "", new { @class = "text-danger" })
+            <div class="panel-body form-horizontal">
+                <div class="form-group">
+                    @if (User.IsInRole("Administrador"))
+                    {
+                        @Html.LabelFor(model => model.UserId, "Administrador", htmlAttributes: new { @class = "control-label col-md-2" })
+                    }
+                    @if (User.IsInRole("Diseñador"))
+                    {
+                        @Html.LabelFor(model => model.UserId, "Diseñador", htmlAttributes: new { @class = "control-label col-md-2" })
+                    }
+                    @if (User.IsInRole("Cliente"))
+                    {
+                        @Html.LabelFor(model => model.UserId, "Diseñador", htmlAttributes: new { @class = "control-label col-md-2" })
+                    }
+                    <div class="col-md-2">
+                        @Html.DropDownList("UserId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                    </div>
                 </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TipoId, "Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.Hidden("TipoId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TipoId, "", new { @class = "text-danger" })
+                        <input class="form-control Tipo_Nombre text-box single-line valid" id="Tipo_Nombre" name="Nombre" type="text" value="" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Imagen, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                        @Html.ValidationMessageFor(model => model.Imagen, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Talle, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.Talle, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Talle, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Vitrina, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Vitrina)
+                            @Html.ValidationMessageFor(model => model.Vitrina, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PrecioTotal, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.PrecioTotal, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PrecioTotal, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                        <label class="control-label col-md-2">Accesorios</label>
+                        @*<label id="tt"></label>*@
+                    <div class="col-md-2">
+                        @*tela*@
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Tela">
+                            Agregar accesorios
+                        </button>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="Tela" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        Agregar Telas
+                                        <div class="pull-right">
+                                            <div id="sheepItForm_controls" class="btn btn-primary">
+                                                <div id="sheepItForm_add">
+                                                    <span>
+                                                        <i class="fa fa-plus" id="agt"> Agregar tela</i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" id="lst">Listo</button>
+                                        </div>
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="sheepItForm">
+                                        <div id="sheepItForm_template" class="form-group col-lg-12">
+                                            @*<label class="control-label col-lg-12" for="sheepItForm_#index#_tela">Telas <span id="sheepItForm_label"></span></label>*@
+                                            <div class="col-md-3">
+                                                @*@Html.EditorFor(model => model., new { htmlAttributes = new { @class = "form-control Tela_Nombre" } })*@
+                                                @Html.DropDownList("TelaId", null, "Selecionar tela", htmlAttributes: new { @id = "sheepItForm_#index#_tela", @class = "form-control sheepItForm_#index#_tela", Name = "DetallePrendas[#index#].TelaId" })
+
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input type="number" name="DetallePrendas[#index#].MetroTela" class="form-control" placeholder="Metros" id="sheepItForm_#index#_metros" />
+                                            </div>
+
+                                            @*<label class="col-md-2 control-label" for="sheepItForm2_#index#_avio">Avios <span id="sheepItForm2_label"></span></label>*@
+                                            <div class="col-md-3">
+                                                @*@Html.EditorFor(model => model., new { htmlAttributes = new { @class = "form-control Tela_Nombre" } })*@
+                                                @Html.DropDownList("AvioId", null, "Selecionar Avio", htmlAttributes: new { @id = "sheepItForm_#index#_avio", @class = "form-control", Name = "DetallePrendas[#index#].AvioId" })
+
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input type="number" name="DetallePrendas[#index#].CantidadAvio" class="form-control" placeholder="Cantidad" id="sheepItForm_#index#_cantidad" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <span class="btn btn-danger btn-block delete">
+                                                    <i class="fa fa-trash" id="sheepItForm_remove_current"> </i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div id="sheepItForm_noforms_template"></div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer" style="border:none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+
+
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PrecioTotal, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PrecioTotal, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PrecioTotal, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-
-        @Html.Partial("_ModalDetallePrendas")
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+@Html.ActionLink("Back to List", "Index")
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -104,6 +190,101 @@
                 minFormsCount: 0,
                 iniFormsCount: 1
             });
+
+            cargar_tipo();
+            function cargar_tipo() {
+                var codigoTipoPrenda = {
+                    url: "/Tipos/getTipoPrendas",
+                    getValue: "Nombre",
+                    list: {
+                        match: {
+                            enabled: true
+                        },
+                        maxNumberOfElements: 8,
+                        sort: {
+                            enabled: true
+                        },
+                        onSelectItemEvent: function () {
+                            var TipoId = $(".Tipo_Nombre").getSelectedItemData().Id;
+                            $("#TipoId").val(TipoId).trigger("change");
+                            var Precio = $(".Tipo_Nombre").getSelectedItemData().Precio;
+                            precioTotal = Precio;
+                        },
+                    },
+                    theme: "plate-dark"
+                    //theme: "square"
+                    //theme: "round"
+                };
+                $("input.Tipo_Nombre").easyAutocomplete(codigoTipoPrenda);
+                $(".easy-autocomplete-container").addClass("text-danger");
+
+            };
+
+
+
+            var precioTotal = 0;
+            var telas = 0;
+            var canttela = [];
+            var cantidadtela = [];
+            var lisTelas = [];
+            var cnt = 1;
+            //suma();
+            function suma() {
+                //for (var i = 0; i < cnt; i++) {
+                //    canttela[i] = $("#sheepItForm_" + i + "_tela").val();
+                //    temp = canttela[i];
+                //    cantidadtela[i] = parseInt(temp);
+                //}
+                cargar_tela();
+                //tela = $("#sheepItForm_"+ i +"_tela").val(precioTotal);
+                $("#PrecioTotal").val(precioTotal);
+                console.log("hola");
+                setTimeout(suma, 50);
+            }
+            $("#agt").click(function () {
+                cnt += 1;
+            });
+            $("#sheepItForm_remove_current").click(function () {
+                cnt -= 1;
+            });
+
+            cargar_tela();
+
+            function cargar_tela() {
+                console.log("hola");
+                var codigoTela = {
+                    url: "/Telas/getTelas",
+                    getValue: "Id",
+                    list: {
+                        match: {
+                            enabled: true
+                        },
+                        maxNumberOfElements: 8,
+                        sort: {
+                            enabled: true
+                        },
+                        onSelectItemEvent: function () {
+                            var TelaId = $(".sheepItForm_" + i + "_tela").getSelectedItemData().Id;
+                            $("#TelaId").val(TelaId).trigger("change");
+                            for (var i = 0; i < cnt; i++) {
+                                canttela[i] = $("#sheepItForm_" + i + "_tela").getSelectedItemData().Precio;
+                                temp = canttela[i];
+                                cantidadtela[i] = parseInt(temp);
+                            }
+                            //var Precio = $("#sheepItForm_" + cnt  + "_tela").getSelectedItemData().Precio;
+                            console.log(cantidadtela)
+                        },
+                    },
+                    theme: "plate-dark"
+                    //theme: "square"
+                    //theme: "round"
+                };
+                //$("input.Tipo_Nombre").easyAutocomplete(codigoTipoPrenda);
+                //$(".easy-autocomplete-container").addClass("text-danger");
+                setTimeout(cargar_tela, 50);
+            };
+
+
         });
     </script>
 }

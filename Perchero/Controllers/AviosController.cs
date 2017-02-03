@@ -14,6 +14,12 @@ namespace Perchero.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public JsonResult getAvios()
+        {
+            var query = from c in db.Avios select new { c.Id, c.Precio };
+            return Json(query, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Avios
         public ActionResult Index()
         {

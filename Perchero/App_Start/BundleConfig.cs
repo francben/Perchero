@@ -34,7 +34,8 @@ namespace Perchero
                       "~/Scripts/fileinput.min.js",
                       "~/Scripts/jquery.fileupload.js",
                       "~/Scripts/jquery.magnific-popup.min.js",
-                      "~/Scripts/quirk.js"
+                      "~/Scripts/quirk.js",
+                      "~/Scripts/jquery.easy-autocomplete.min.js"
                       //"~/Scripts/dashboard.js"
                       ));
 
@@ -45,7 +46,10 @@ namespace Perchero
                       "~/lib/weather-icons/css/weather-icons.css",
                       "~/lib/ionicons/css/ionicons.css",
                       "~/lib/jquery-toggles/toggles-full.css",
+                      //"~/Content/style.css",
+                      "~/Content/animate.min.css",
                       "~/Content/magnific-popup.css",
+                      "~/Content/easy-autocomplete.min.css",
                       //"~/lib/morrisjs/morris.css",
                       "~/Content/quirk.css"));
         }

@@ -62,17 +62,17 @@ namespace Perchero.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Prenda prenda, HttpPostedFileBase ImgPrenda)
+        public ActionResult Create(Prenda prenda, HttpPostedFileBase Imagen)
         {
             prenda.Imagen = ProximoId().ToString();
             if (ModelState.IsValid)
             {
                 db.Prendas.Add(prenda);
                 db.SaveChanges();
-                if (ImgPrenda != null)
+                if (Imagen != null)
                 {
-                    var nombrearchivo = CrearImagen(ImgPrenda, prenda);
-                    CrearMiniatura(ImgPrenda, prenda);
+                    var nombrearchivo = CrearImagen(Imagen, prenda);
+                    CrearMiniatura(Imagen, prenda);
                 }
                 return RedirectToAction("Index");
             }

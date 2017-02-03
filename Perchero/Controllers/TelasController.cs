@@ -14,6 +14,12 @@ namespace Perchero.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
+        public JsonResult getTelas()
+        {
+            var query = from c in db.Telas select new { c.Id, c.Precio };
+            return Json(query, JsonRequestBehavior.AllowGet);
+        }
         // GET: Telas
         public ActionResult Index()
         {

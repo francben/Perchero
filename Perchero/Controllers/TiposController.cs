@@ -14,6 +14,12 @@ namespace Perchero.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public JsonResult getTipoPrendas()
+        {
+            var query = from c in db.Tipoes select new { c.Id, c.Nombre, c.Precio };
+            return Json(query, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Tipos
         public ActionResult Index()
         {

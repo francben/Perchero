@@ -47,7 +47,9 @@
             @Html.DisplayFor(modelItem => item.Nombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Imagen)
+            <span class="img-responsive">
+                <img class="img-circle img-frame" width="40" src="@Url.Content("~/Content/imgprenda/imgprev/"+item.Imagen+"/"+item.Imagen+".png")" />
+            </span>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Talle)
