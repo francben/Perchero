@@ -17,7 +17,7 @@ namespace Perchero.Controllers
 
         public JsonResult getTelas()
         {
-            var query = from c in db.Telas select new { c.Id, c.Precio };
+            var query = from c in db.Telas select new { c.Id, c.Nombre, c.Precio };
             return Json(query, JsonRequestBehavior.AllowGet);
         }
         // GET: Telas

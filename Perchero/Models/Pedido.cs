@@ -19,12 +19,13 @@ namespace Perchero.Models
         [ForeignKey("UserId")]
         public virtual ApplicationUser Usuario { get; set; }
         [Required(ErrorMessage = "Este campo es requerido")]
-        public string FechaPedido { get; set; }
+        public DateTime FechaPedido { get; set; }
         [Required(ErrorMessage = "Este campo es requerido")]
-        public string FechaEntrega { get; set; }
+        public DateTime FechaEntrega { get; set; }
+        [Range(500, 9999999, ErrorMessage = " El monto no debe exeder al precio total de la prenda ")]
         [Required(ErrorMessage = "Este campo es requerido")]
-        public string Seña { get; set; }
+        public double Seña { get; set; }
         [Required(ErrorMessage = "Este campo es requerido")]
-        public string Saldo { get; set; }
+        public double Saldo { get; set; }
     }
 }

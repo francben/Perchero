@@ -187,6 +187,10 @@
     <Compile Include="Migrations\201701190251239_ActualizarPrenda.Designer.cs">
       <DependentUpon>201701190251239_ActualizarPrenda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702090027015_CorrecionPedido.cs" />
+    <Compile Include="Migrations\201702090027015_CorrecionPedido.Designer.cs">
+      <DependentUpon>201702090027015_CorrecionPedido.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Avio.cs" />
@@ -304,6 +308,7 @@
     <Content Include="Views\Pedidoes\Index.cshtml" />
     <Content Include="Views\Shared\_ModalDetallePrendas.cshtml" />
     <Content Include="Views\Prendas\Galeria.cshtml" />
+    <Content Include="Views\Pedidoes\Pedido.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -329,6 +334,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701190251239_ActualizarPrenda.resx">
       <DependentUpon>201701190251239_ActualizarPrenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702090027015_CorrecionPedido.resx">
+      <DependentUpon>201702090027015_CorrecionPedido.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

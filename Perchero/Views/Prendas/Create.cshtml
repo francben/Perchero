@@ -137,7 +137,7 @@
                                             @*<label class="col-md-2 control-label" for="sheepItForm2_#index#_avio">Avios <span id="sheepItForm2_label"></span></label>*@
                                             <div class="col-md-3">
                                                 @*@Html.EditorFor(model => model., new { htmlAttributes = new { @class = "form-control Tela_Nombre" } })*@
-                                                @Html.DropDownList("AvioId", null, "Selecionar Avio", htmlAttributes: new { @id = "sheepItForm_#index#_avio", @class = "form-control", Name = "DetallePrendas[#index#].AvioId" })
+                                                @Html.DropDownList("AvioId", null, "Selecionar Avio", htmlAttributes: new { @id = "sheepItForm_#index#_avio", @class = "form-control sheepItForm_#index#_avio", Name = "DetallePrendas[#index#].AvioId" })
 
                                             </div>
                                             <div class="col-md-2">
@@ -235,12 +235,13 @@
                 //    temp = canttela[i];
                 //    cantidadtela[i] = parseInt(temp);
                 //}
-                cargar_tela();
+                //cargar_tela();
                 //tela = $("#sheepItForm_"+ i +"_tela").val(precioTotal);
                 $("#PrecioTotal").val(precioTotal);
-                console.log("hola");
-                setTimeout(suma, 50);
+                //console.log("hola");
+                //setTimeout(suma, 50);
             }
+
             $("#agt").click(function () {
                 cnt += 1;
             });
@@ -251,7 +252,6 @@
             cargar_tela();
 
             function cargar_tela() {
-                console.log("hola");
                 var codigoTela = {
                     url: "/Telas/getTelas",
                     getValue: "Id",
@@ -264,15 +264,17 @@
                             enabled: true
                         },
                         onSelectItemEvent: function () {
-                            var TelaId = $(".sheepItForm_" + i + "_tela").getSelectedItemData().Id;
-                            $("#TelaId").val(TelaId).trigger("change");
+                            console.log("etro");
                             for (var i = 0; i < cnt; i++) {
-                                canttela[i] = $("#sheepItForm_" + i + "_tela").getSelectedItemData().Precio;
+                                var TelaId = $(".sheepItForm_" + i + "_tela").getSelectedItemData().Id;
+                                console.log(TelaId);
+                                $("#TelaId").val(TelaId).trigger("change");
+                                canttela[i] = $(".sheepItForm_" + i + "_tela").getSelectedItemData().Precio;
                                 temp = canttela[i];
                                 cantidadtela[i] = parseInt(temp);
                             }
-                            //var Precio = $("#sheepItForm_" + cnt  + "_tela").getSelectedItemData().Precio;
-                            console.log(cantidadtela)
+
+                            console.log(cantidadtela);
                         },
                     },
                     theme: "plate-dark"

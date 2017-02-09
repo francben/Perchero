@@ -7,12 +7,45 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Perchero.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Perchero.Controllers
 {
     public class PedidoesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        //get
+        public ActionResult Pedido(int PrendaId)
+        {
+            var userid = User.Identity.GetUserId();
+            Pedido pedido = new Pedido();
+            Prenda p = db.Prendas.Find(PrendaId);
+            pedido.Prenda = p;
+            pedido.PrendaId = p.Id;
+            pedido.PrendaId = PrendaId;
+            pedido.UserId = userid;
+            pedido.FechaPedido = DateTime.Now;
+            pedido.FechaEntrega = DateTime.Now;
+            pedido.Seña = Math.Round(p.PrecioTotal * 0.20, 0);
+            pedido.Saldo = p.PrecioTotal - pedido.Seña;
+            return View(pedido);
+        }
+        //post
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Pedido(Pedido pedido)
+        {
+            if (ModelState.IsValid)
+            {
+                Pedido p = new Pedido();
+                p.FechaPedido = DateTime.Now;
+                db.Pedidoes.Add(pedido);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(pedido);
+        }
 
         // GET: Pedidoes
         public ActionResult Index()
