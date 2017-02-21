@@ -9,7 +9,8 @@ namespace Perchero
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -24,20 +25,29 @@ namespace Perchero
                       "~/lib/jquery-ui/jquery-ui.js",
                       "~/lib/bootstrap/js/bootstrap.js",
                       "~/lib/jquery-toggles/toggles.js",
-                      //"~/lib/morrisjs/morris.js",
-                      //"~/lib/raphael/raphael.js",
-                      //"~/lib/flot/jquery.flot.js",
-                      //"~/lib/flot/jquery.flot.resize.js",
-                      //"~/lib/flot-spline/jquery.flot.spline.js",
-                      //"~/lib/jquery-knob/jquery.knob.js",
+                      "~/lib/flot/jquery.flot.js",
+                      "~/lib/flot/jquery.flot.resize.js",
+                      "~/lib/flot/jquery.flot.symbol.js",
+                      "~/lib/flot/jquery.flot.crosshair.js",
+                      "~/lib/flot/jquery.flot.categories.js",
+                      "~/lib/flot/jquery.flot.pie.js",
+                      "~/lib/flot-spline/jquery.flot.spline.js",
+                      "~/lib/morrisjs/morris.js",
+                      "~/lib/raphael/raphael.js",
+                      "~/lib/jquery-sparkline/jquery.sparkline.js",
+                      //"~/lib/timepicker/jquery.timepicker.js",
                       "~/Scripts/bootstrap.file-input.js",
                       "~/Scripts/fileinput.min.js",
                       "~/Scripts/jquery.fileupload.js",
-                      "~/Scripts/jquery.magnific-popup.min.js",
-                      "~/Scripts/quirk.js",
-                      "~/Scripts/jquery.easy-autocomplete.min.js"
-                      //"~/Scripts/dashboard.js"
+                      "~/Scripts/jquery.bsPhotoGallery.js",
+                      "~/Scripts/jquery.unobtrusive-ajax.min.js",
+                      "~/Scripts/jquery.easy-autocomplete.min.js",
+                      "~/lib/datatables/jquery.dataTables.js",
+                      "~/lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js",
+                      "~/js/quirk.js",
+                      "~/js/charts.js"
                       ));
+
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/lib/Hover/hover.css",
@@ -48,9 +58,9 @@ namespace Perchero
                       "~/lib/jquery-toggles/toggles-full.css",
                       //"~/Content/style.css",
                       "~/Content/animate.min.css",
-                      "~/Content/magnific-popup.css",
+                      "~/Content/jquery.bsPhotoGallery.css",
                       "~/Content/easy-autocomplete.min.css",
-                      //"~/lib/morrisjs/morris.css",
+                       "~/lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css",
                       "~/Content/quirk.css"));
         }
     }

@@ -4,60 +4,76 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="contentpanel">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Prenda.UserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Usuario.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaPedido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaEntrega)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Seña)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Saldo)
-        </th>
-        <th></th>
-    </tr>
+    <ol class="breadcrumb breadcrumb-quirk">
+        <li>
+            <a href="index.html"><i class="fa fa-home mr5"></i> Home</a>
+        </li>
+        <li><a href="basic-tables.html">Tables</a></li>
+        <li class="active">Data Tables</li>
+    </ol>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prenda.Usuario.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuario.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaPedido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaEntrega)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Seña)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Saldo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    <div class="panel">
+        <div class="panel-heading">
+            <h4 class="panel-title">Basic Styling</h4>
+            <p>DataTables has most features enabled by default, so all you need to do to use it with one of your own tables is to call the construction function.</p>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table id="dataTable" class="table table-bordered table-striped-col">
+                    <thead>
+                        <tr>
+                            <th>Diseñador</th>
+                            <th>Fecha de Pedido</th>
+                            <th>Fecha de Entrega</th>
+                            <th>Seña</th>
+                            <th>Saldo</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
 
-</table>
+                    <tfoot>
+                        <tr>
+                            <th>Diseñador</th>
+                            <th>Fecha de Pedido</th>
+                            <th>Fecha de Entrega</th>
+                            <th>Seña</th>
+                            <th>Saldo</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Prenda.Usuario.Nombre @item.Prenda.Usuario.Apellido</td>
+                                <td>@String.Format("{0:dd/MM/yyyy}", item.FechaPedido)</td>
+                                <td>@String.Format("{0:dd/MM/yyyy}", item.FechaEntrega)</td>
+                                <td>@item.Seña</td>
+                                <td>@item.Saldo</td>
+                                <td>@item.Prenda.PrecioTotal</td>
+                                <td>
+                                    <ul class="table-options">
+                                        <li>
+                                            <a href="@Url.Action("Edit", "Pedidoes", new {id = item.Id})"><i class="fa fa-pencil"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Details", "Pedidoes", new { id = item.Id })"><i class="fa fa-eye"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Delete", "Pedidoes", new {id = item.Id})"><i class="fa fa-trash"></i></a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div><!-- panel -->
+</div><!-- contentpanel -->

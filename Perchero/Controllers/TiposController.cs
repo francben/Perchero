@@ -16,7 +16,7 @@ namespace Perchero.Controllers
 
         public JsonResult getTipoPrendas()
         {
-            var query = from c in db.Tipoes select new { c.Id, c.Nombre, c.Precio };
+            var query = from c in db.Tipoes select new { c.Id, c.Categoria, c.Precio };
             return Json(query, JsonRequestBehavior.AllowGet);
         }
 
@@ -52,7 +52,7 @@ namespace Perchero.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nombre,Precio")] Tipo tipo)
+        public ActionResult Create([Bind(Include = "Id,Categoria,Precio")] Tipo tipo)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +84,7 @@ namespace Perchero.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nombre,Precio")] Tipo tipo)
+        public ActionResult Edit([Bind(Include = "Id,Categoria,Precio")] Tipo tipo)
         {
             if (ModelState.IsValid)
             {

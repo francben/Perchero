@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Perchero &trade;</title>
@@ -26,160 +26,46 @@
                 <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
 
                 @*<div class="searchpanel">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                        </span>
-                    </div> 
-                </div>*@
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>*@
 
                 <div class="header-right">
                     <ul class="headermenu">
-                        <li>
-                            <div id="noticePanel" class="btn-group">
-                                <button class="btn btn-notice alert-notice" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                </button>
-                                <div id="noticeDropdown" class="dropdown-menu dm-notice pull-right">
-                                    <div role="tabpanel">
-                                        <!-- Nav tabs -->
-                                        <ul class="nav nav-tabs nav-justified" role="tablist">
-                                            <li class="active"><a data-target="#notification" data-toggle="tab">Notifications (2)</a></li>
-                                            <li><a data-target="#reminders" data-toggle="tab">Reminders (4)</a></li>
-                                        </ul>
+                        @if (User.IsInRole("Diseñador"))
+                        {
+                            <li>
+                                <div id="noticePanel" class="btn-group">
+                                    <button class="btn btn-notice alert-notice" data-toggle="dropdown">
+                                        <i class="fa fa-globe"></i>
+                                    </button>
+                                    <div id="noticeDropdown" class="dropdown-menu dm-notice pull-right">
+                                        <div role="tabpanel">
+                                            <!-- Nav tabs -->
+                                            <ul class="nav nav-tabs nav-justified" role="tablist">
+                                                <li class="active"><a data-target="#notification" data-toggle="tab">Entrantes</a></li>
+                                            </ul>
 
-                                        <!-- Tab panes -->
-                                        <div class="tab-content">
-                                            <div role="tabpanel" class="tab-pane active" id="notification">
-                                                <ul class="list-group notice-list">
-                                                    <li class="list-group-item unread">
-                                                        <div class="row">
-                                                            <div class="col-xs-2">
-                                                                <i class="fa fa-envelope"></i>
-                                                            </div>
-                                                            <div class="col-xs-10">
-                                                                <h5><a href="">New message from Weno Carasbong</a></h5>
-                                                                <small>June 20, 2015</small>
-                                                                <span>Soluta nobis est eligendi optio cumque...</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="list-group-item unread">
-                                                        <div class="row">
-                                                            <div class="col-xs-2">
-                                                                <i class="fa fa-user"></i>
-                                                            </div>
-                                                            <div class="col-xs-10">
-                                                                <h5><a href="">Renov Leonga is now following you!</a></h5>
-                                                                <small>June 18, 2015</small>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <div class="row">
-                                                            <div class="col-xs-2">
-                                                                <i class="fa fa-user"></i>
-                                                            </div>
-                                                            <div class="col-xs-10">
-                                                                <h5><a href="">Zaham Sindil is now following you!</a></h5>
-                                                                <small>June 17, 2015</small>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <div class="row">
-                                                            <div class="col-xs-2">
-                                                                <i class="fa fa-thumbs-up"></i>
-                                                            </div>
-                                                            <div class="col-xs-10">
-                                                                <h5><a href="">Rey Reslaba likes your post!</a></h5>
-                                                                <small>June 16, 2015</small>
-                                                                <span>HTML5 For Beginners Chapter 1</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <div class="row">
-                                                            <div class="col-xs-2">
-                                                                <i class="fa fa-comment"></i>
-                                                            </div>
-                                                            <div class="col-xs-10">
-                                                                <h5><a href="">Socrates commented on your post!</a></h5>
-                                                                <small>June 16, 2015</small>
-                                                                <span>Temporibus autem et aut officiis debitis...</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <a class="btn-more" href="">View More Notifications <i class="fa fa-long-arrow-right"></i></a>
-                                            </div><!-- tab-pane -->
-
-                                            <div role="tabpanel" class="tab-pane" id="reminders">
-                                                <h1 id="todayDay" class="today-day">...</h1>
-                                                <h3 id="todayDate" class="today-date">...</h3>
-
-                                                <h5 class="today-weather"><i class="wi wi-hail"></i> Cloudy 77 Degree</h5>
-                                                <p>Thunderstorm in the area this afternoon through this evening</p>
-
-                                                <h4 class="panel-title">Upcoming Events</h4>
-                                                <ul class="list-group">
-                                                    <li class="list-group-item">
-                                                        <div class="row">
-                                                            <div class="col-xs-2">
-                                                                <h4>20</h4>
-                                                                <p>Aug</p>
-                                                            </div>
-                                                            <div class="col-xs-10">
-                                                                <h5><a href="">HTML5/CSS3 Live! United States</a></h5>
-                                                                <small>San Francisco, CA</small>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <div class="row">
-                                                            <div class="col-xs-2">
-                                                                <h4>05</h4>
-                                                                <p>Sep</p>
-                                                            </div>
-                                                            <div class="col-xs-10">
-                                                                <h5><a href="">Web Technology Summit</a></h5>
-                                                                <small>Sydney, Australia</small>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <div class="row">
-                                                            <div class="col-xs-2">
-                                                                <h4>25</h4>
-                                                                <p>Sep</p>
-                                                            </div>
-                                                            <div class="col-xs-10">
-                                                                <h5><a href="">HTML5 Developer Conference 2015</a></h5>
-                                                                <small>Los Angeles CA United States</small>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <div class="row">
-                                                            <div class="col-xs-2">
-                                                                <h4>10</h4>
-                                                                <p>Oct</p>
-                                                            </div>
-                                                            <div class="col-xs-10">
-                                                                <h5><a href="">AngularJS Conference 2015</a></h5>
-                                                                <small>Silicon Valley CA, United States</small>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <a class="btn-more" href="">View More Events <i class="fa fa-long-arrow-right"></i></a>
+                                            <!-- Tab panes -->
+                                            <div class="tab-content">
+                                                <div role="tabpanel" class="tab-pane active" id="notification">
+                                                    <ul class="list-group notice-list">
+                                                        @{
+                                                            Html.RenderAction("NotificacionEntrantes", "Pedidoes");
+                                                        }
+                                                    </ul>
+                                                    <a class="btn-more" href="@Url.Action("Entrantes", "Pedidoes")">Ver mas pedidos... <i class="fa fa-long-arrow-right"></i></a>
+                                                </div><!-- tab-pane -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        }
                         @Html.Partial("_LoginPartial")
                         <li>
                             <button id="chatview" class="btn btn-chat alert-notice">
@@ -207,7 +93,10 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading">Elen Adarna <a data-toggle="collapse" data-target="#loguserinfo" class="pull-right"><i class="fa fa-angle-down"></i></a></h4>
+                        <h4 class="media-heading">
+                            Elen Adarna
+                            <a data-toggle="collapse" data-target="#loguserinfo" class="pull-right"><i class="fa fa-angle-down"></i></a>
+                        </h4>
                         <span>Software Engineer</span>
                     </div>
                 </div><!-- leftpanel-profile -->
@@ -244,11 +133,21 @@
                 </div><!-- leftpanel-userinfo -->
 
                 <ul class="nav nav-tabs nav-justified nav-sidebar">
-                    <li class="tooltips active" data-toggle="tooltip" title="Main Menu"><a data-toggle="tab" data-target="#mainmenu"><i class="tooltips fa fa-ellipsis-h"></i></a></li>
-                    <li class="tooltips unread" data-toggle="tooltip" title="Check Mail"><a data-toggle="tab" data-target="#emailmenu"><i class="tooltips fa fa-envelope"></i></a></li>
-                    <li class="tooltips" data-toggle="tooltip" title="Contacts"><a data-toggle="tab" data-target="#contactmenu"><i class="fa fa-user"></i></a></li>
-                    <li class="tooltips" data-toggle="tooltip" title="Settings"><a data-toggle="tab" data-target="#settings"><i class="fa fa-cog"></i></a></li>
-                    <li class="tooltips" data-toggle="tooltip" title="Log Out"><a href="signin.html"><i class="fa fa-sign-out"></i></a></li>
+                    <li class="tooltips active" data-toggle="tooltip" title="Main Menu">
+                        <a data-toggle="tab" data-target="#mainmenu"><i class="tooltips fa fa-ellipsis-h"></i></a>
+                    </li>
+                    <li class="tooltips unread" data-toggle="tooltip" title="Check Mail">
+                        <a data-toggle="tab" data-target="#emailmenu"><i class="tooltips fa fa-envelope"></i></a>
+                    </li>
+                    <li class="tooltips" data-toggle="tooltip" title="Contacts">
+                        <a data-toggle="tab" data-target="#contactmenu"><i class="fa fa-user"></i></a>
+                    </li>
+                    <li class="tooltips" data-toggle="tooltip" title="Settings">
+                        <a data-toggle="tab" data-target="#settings"><i class="fa fa-cog"></i></a>
+                    </li>
+                    <li class="tooltips" data-toggle="tooltip" title="Log Out">
+                        <a href="signin.html"><i class="fa fa-sign-out"></i></a>
+                    </li>
                 </ul>
 
                 <div class="tab-content">
@@ -260,14 +159,14 @@
                         <ul class="nav nav-pills nav-stacked nav-quirk">
                             @if (User.IsInRole("Administrador"))
                             {
-                            <li class="nav-parent">
-                                <a href=""><i class="glyphicon glyphicon-wrench"></i> <span>Configuracion</span></a>
-                                <ul class="children">
-                                    <li><a href="@Url.Action("Create","Admin")">Nuevo usuario</a></li>
-                                    <li><a href="@Url.Action("Index","Admin")">Lista de usuarios</a></li>
-                                    <li><a href="@Url.Action("ViewAllRoles","Admin")">Lista de roles</a></li>
-                                </ul>
-                            </li>
+                                <li class="nav-parent">
+                                    <a href=""><i class="glyphicon glyphicon-wrench"></i> <span>Configuracion</span></a>
+                                    <ul class="children">
+                                        <li><a href="@Url.Action("Create","Admin")">Nuevo usuario</a></li>
+                                        <li><a href="@Url.Action("Index","Admin")">Lista de usuarios</a></li>
+                                        <li><a href="@Url.Action("ViewAllRoles","Admin")">Lista de roles</a></li>
+                                    </ul>
+                                </li>
                             }
                             <li class="nav-parent">
                                 <a href=""><i class="fa fa-cube"></i> <span>Tipos</span></a>
@@ -282,6 +181,7 @@
                                     <li><a href="@Url.Action("Create","Prendas")">Nueva prenda</a></li>
                                     <li><a href="@Url.Action("Index","Prendas")">Lista de prendas</a></li>
                                     <li><a href="@Url.Action("Galeria","Prendas")">Galeria de prendas</a></li>
+                                    <li><a href="@Url.Action("Calcular","Prendas")">Calculadora de prendas</a></li>
                                 </ul>
                             </li>
                             <li class="nav-parent">
@@ -303,6 +203,8 @@
                                 <ul class="children">
                                     <li><a href="@Url.Action("Create","Pedidoes")">Nuevo Pedido</a></li>
                                     <li><a href="@Url.Action("Index","Pedidoes")">Mis Pedidos</a></li>
+                                    <li><a href="@Url.Action("Entrantes","Pedidoes")">Entrantes</a></li>
+                                    <li><a href="@Url.Action("Terminados","Pedidoes")">Terminados</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -316,17 +218,31 @@
 
                         <h5 class="sidebar-title">Mailboxes</h5>
                         <ul class="nav nav-pills nav-stacked nav-quirk nav-mail">
-                            <li><a href="email.html"><i class="fa fa-inbox"></i> <span>Inbox (3)</span></a></li>
-                            <li><a href="email.html"><i class="fa fa-pencil"></i> <span>Draft (2)</span></a></li>
-                            <li><a href="email.html"><i class="fa fa-paper-plane"></i> <span>Sent</span></a></li>
+                            <li>
+                                <a href="email.html"><i class="fa fa-inbox"></i> <span>Inbox (3)</span></a>
+                            </li>
+                            <li>
+                                <a href="email.html"><i class="fa fa-pencil"></i> <span>Draft (2)</span></a>
+                            </li>
+                            <li>
+                                <a href="email.html"><i class="fa fa-paper-plane"></i> <span>Sent</span></a>
+                            </li>
                         </ul>
 
                         <h5 class="sidebar-title">Tags</h5>
                         <ul class="nav nav-pills nav-stacked nav-quirk nav-label">
-                            <li><a href="#"><i class="fa fa-tags primary"></i> <span>Communication</span></a></li>
-                            <li><a href="#"><i class="fa fa-tags success"></i> <span>Updates</span></a></li>
-                            <li><a href="#"><i class="fa fa-tags warning"></i> <span>Promotions</span></a></li>
-                            <li><a href="#"><i class="fa fa-tags danger"></i> <span>Social</span></a></li>
+                            <li>
+                                <a href="#"><i class="fa fa-tags primary"></i> <span>Communication</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-tags success"></i> <span>Updates</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-tags warning"></i> <span>Promotions</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-tags danger"></i> <span>Social</span></a>
+                            </li>
                         </ul>
                     </div><!-- tab-pane -->
                     <!-- ################### CONTACT LIST ################### -->
@@ -511,5 +427,48 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            
+            var oTable = $('#dataTable').DataTable({
+                "bProcessing": true,
+                "sPaginationType": "full_numbers",
+                "paging": true,
+                "iDisplayLength": 10,
+                "bPaginate": true,
+                "bSort": true,
+                "oLanguage": {
+                    "oPaginate": {
+                        "sPrevious": "←",
+                        "sNext": "→",
+                        "sLast": "»",
+                        "sFirst": "«"
+                    },
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:   ",
+                    "sUrl": "",
+                    "sInfoThousands": ".",
+                    "sLoadingRecords": "Cargando...",
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
+
+            $('ul.first').bsPhotoGallery({
+                "classes": "col-lg-2 col-md-4 col-sm-3 col-xs-4 col-xxs-12",
+                "hasModal": true,
+                // "fullHeight" : false
+            });
+        });
+    </script>
 </body>
 </html>

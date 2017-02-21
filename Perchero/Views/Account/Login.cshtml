@@ -16,17 +16,17 @@
         {
             @Html.AntiForgeryToken()
             <div class="form-group mb10">
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group nomargin">
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -51,7 +51,6 @@
     </div>
 </div>
 <!-- panel -->
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

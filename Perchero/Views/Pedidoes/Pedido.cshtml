@@ -79,7 +79,8 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-            $(function () {
+        $(function () {
+            $('#FechaPedido, #FechaEntrega').datepicker({dateFormat: "yy-mm-dd"});
                 var pprenda = @Html.Raw(Json.Encode(Model.Prenda.PrecioTotal));
                 cal();
                 function cal(){ 

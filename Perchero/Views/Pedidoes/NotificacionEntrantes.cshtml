@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Perchero.Models.Pedido>
+
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model) {
+  <li class="list-group-item unread">
+    <div class="row">
+        <div class="col-xs-2">
+            <i class="fa fa-envelope"></i>
+        </div>
+        <div class="col-xs-10">
+            <h5><a href="@Url.Action("Details", "Pedidoes", new {id = item.Id})">Nuevo pedido entrante de @Html.DisplayFor(modelItem => item.Usuario.Nombre) @Html.DisplayFor(modelItem => item.Usuario.Apellido)</a></h5>
+            <small>@Html.DisplayFor(modelItem => item.FechaEntrega)</small>
+            <span>@Html.DisplayFor(modelItem => item.Prenda.Nombre)</span>
+        </div>
+    </div>
+</li> 
+}

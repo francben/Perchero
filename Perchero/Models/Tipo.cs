@@ -12,7 +12,7 @@ namespace Perchero.Models
         [HiddenInput(DisplayValue = true)]
         public int Id { get; set; }
         [Required(ErrorMessage = "Este campo es requerido")]
-        public string Nombre { get; set; }
+        public string Categoria { get; set; }
         [Required(ErrorMessage = "Este campo es requerido")]
         public int Precio { get; set; }
     }

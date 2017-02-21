@@ -67,7 +67,16 @@ namespace Perchero.Models
         [Required]
         [EmailAddress]
         [Display(Name = "Correo electrónico")]
+
         public string Email { get; set; }
+        [Required(ErrorMessage = "Este campo es requerido")]
+        public string Nombre { get; set; }
+        [Required(ErrorMessage = "Este campo es requerido")]
+        public string Apellido { get; set; }
+        [Required(ErrorMessage = "Este campo es requerido")]
+        public string Direccion { get; set; }
+        [Required(ErrorMessage = "Este campo es requerido")]
+        public string Telefono { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2}.", MinimumLength = 6)]

@@ -37,8 +37,14 @@ namespace Perchero.Controllers
         }
 
         // GET: DetallePrendas/Create
-        public ActionResult Create()
+        public ActionResult Create(int TelaId)
         {
+            DetallePrenda detalle = new DetallePrenda();
+            Tela t = db.Telas.Find(TelaId);
+            detalle.Tela = t;
+            detalle.TelaId = t.Id;
+            detalle.TelaId = TelaId;
+            
             ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre");
             ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId");
             ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre");

@@ -24,8 +24,12 @@ namespace Perchero.Controllers
             pedido.PrendaId = p.Id;
             pedido.PrendaId = PrendaId;
             pedido.UserId = userid;
-            pedido.FechaPedido = DateTime.Now;
-            pedido.FechaEntrega = DateTime.Now;
+            string fechaP = DateTime.Now.ToString("yyyy-MM-dd");
+            DateTime fPedido = DateTime.ParseExact(fechaP, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            string fechaE = DateTime.Now.ToString("yyyy-MM-dd");
+            DateTime fEntrega = DateTime.ParseExact(fechaE, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            pedido.FechaPedido = fPedido;
+            pedido.FechaEntrega = fEntrega;
             pedido.Seña = Math.Round(p.PrecioTotal * 0.20, 0);
             pedido.Saldo = p.PrecioTotal - pedido.Seña;
             return View(pedido);
@@ -38,7 +42,9 @@ namespace Perchero.Controllers
             if (ModelState.IsValid)
             {
                 Pedido p = new Pedido();
-                p.FechaPedido = DateTime.Now;
+                string fechaP = DateTime.Now.ToString("yyyy-MM-dd");
+                DateTime fPedido = DateTime.ParseExact(fechaP, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+                p.FechaPedido = fPedido;
                 db.Pedidoes.Add(pedido);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -51,7 +57,22 @@ namespace Perchero.Controllers
         public ActionResult Index()
         {
             var pedidoes = db.Pedidoes.Include(p => p.Prenda).Include(p => p.Usuario);
-            return View(pedidoes.ToList());
+            if (User.IsInRole("Administrador"))
+            {
+                return View(pedidoes.ToList());
+            }
+            else
+            {
+                var userid = User.Identity.GetUserId();
+                return View(pedidoes.Where(x => x.UserId == userid).ToList());
+            }
+
+        }
+
+        public JsonResult getBarPedidos()
+        {
+            var query = db.Pedidoes.GroupBy(x => x.FechaPedido.Month).Select(s => new { mes = s.FirstOrDefault().FechaPedido.Month, cantidad = s.Count() } ).ToList();
+            return Json(query, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Pedidoes/Details/5
@@ -96,6 +117,33 @@ namespace Perchero.Controllers
             return View(pedido);
         }
 
+        [Authorize(Roles = "Diseñador")]
+        public ActionResult Entrantes()
+        {
+            var UserId = User.Identity.GetUserId();
+            var pedidoes = db.Pedidoes.Include(p => p.Usuario).Include(p => p.Prenda);
+            return View(pedidoes.Where(x => x.Prenda.UserId == UserId).Where(x => x.Estado == false).ToList());
+        }
+
+        [Authorize(Roles = "Diseñador")]
+        public ActionResult Terminados()
+        {
+            var UserId = User.Identity.GetUserId();
+            var pedidoes = db.Pedidoes.Include(p => p.Usuario).Include(p => p.Prenda);
+            return View(pedidoes.Where(x => x.Prenda.UserId == UserId).Where(x => x.Estado == true).ToList());
+        }
+
+        public ActionResult NotificacionEntrantes()
+        {
+            var UserId = User.Identity.GetUserId();
+            List<Pedido> lista = db.Pedidoes.Where(x => x.Estado == false).Where(x => x.Prenda.UserId == UserId).ToList();
+            if (lista != null  || lista.Count > 0)
+            {
+                return View(lista);
+            }
+            return View();
+        }
+
         // GET: Pedidoes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -130,6 +178,57 @@ namespace Perchero.Controllers
             ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre", pedido.UserId);
             return View(pedido);
         }
+
+        // GET: Pedidoes/Edit/5
+        public ActionResult Pago(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Pedido pedido = db.Pedidoes.Find(id);
+            if (pedido == null)
+            {
+                return HttpNotFound();
+            }
+            pedido.Seña = pedido.Saldo;
+
+            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId", pedido.PrendaId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre", pedido.UserId);
+            return View(pedido);
+        }
+
+        // POST: Pedidoes/Edit/5
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Pago([Bind(Include = "Id,PrendaId,UserId,FechaPedido,FechaEntrega,Seña,Saldo")] Pedido pedido)
+        {
+            if (ModelState.IsValid)
+            {
+                if (pedido.Saldo == 0.0)
+                {
+                    pedido.Estado = true;
+                }
+                else
+                {
+                    pedido.Estado = false;
+                }
+                db.Entry(pedido).State = EntityState.Modified;
+                db.SaveChanges();
+                if (pedido.Estado)
+                {
+                    return RedirectToAction("Terminados");
+                }
+                return RedirectToAction("Entrantes");
+            }
+            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId", pedido.PrendaId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre", pedido.UserId);
+            return View(pedido);
+            
+        }
+
 
         // GET: Pedidoes/Delete/5
         public ActionResult Delete(int? id)

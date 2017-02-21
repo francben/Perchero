@@ -191,6 +191,18 @@
     <Compile Include="Migrations\201702090027015_CorrecionPedido.Designer.cs">
       <DependentUpon>201702090027015_CorrecionPedido.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702172022027_PedidoFechas.cs" />
+    <Compile Include="Migrations\201702172022027_PedidoFechas.Designer.cs">
+      <DependentUpon>201702172022027_PedidoFechas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702172153482_PedidoEstado.cs" />
+    <Compile Include="Migrations\201702172153482_PedidoEstado.Designer.cs">
+      <DependentUpon>201702172153482_PedidoEstado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702202352484_ActualizarTipo.cs" />
+    <Compile Include="Migrations\201702202352484_ActualizarTipo.Designer.cs">
+      <DependentUpon>201702202352484_ActualizarTipo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Avio.cs" />
@@ -309,6 +321,11 @@
     <Content Include="Views\Shared\_ModalDetallePrendas.cshtml" />
     <Content Include="Views\Prendas\Galeria.cshtml" />
     <Content Include="Views\Pedidoes\Pedido.cshtml" />
+    <Content Include="Views\Prendas\Calcular.cshtml" />
+    <Content Include="Views\Pedidoes\Entrantes.cshtml" />
+    <Content Include="Views\Pedidoes\Terminados.cshtml" />
+    <Content Include="Views\Pedidoes\Pago.cshtml" />
+    <Content Include="Views\Pedidoes\NotificacionEntrantes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -337,6 +354,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702090027015_CorrecionPedido.resx">
       <DependentUpon>201702090027015_CorrecionPedido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702172022027_PedidoFechas.resx">
+      <DependentUpon>201702172022027_PedidoFechas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702172153482_PedidoEstado.resx">
+      <DependentUpon>201702172153482_PedidoEstado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702202352484_ActualizarTipo.resx">
+      <DependentUpon>201702202352484_ActualizarTipo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

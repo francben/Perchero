@@ -20,8 +20,6 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     Crear Usuario
-                    <button type="submit" class="btn btn-success btn-quirk btn-stroke btn-xs"><i class="glyphicon glyphicon-floppy-disk"></i></button>
-                    <a class="btn btn-default btn-quirk btn-stroke btn-xs" href="@Url.Action("Index","Admin")"><i class="glyphicon glyphicon-arrow-left"></i></a>
                 </h4>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             </div>
@@ -29,7 +27,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Imagen, htmlAttributes: new { @class = "control-label col-md-1" })
                     <div class="col-md-11">
-                        @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "", @type = "" } })
+                        @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "", @type = "file" } })
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -89,12 +87,13 @@
                     </div>
                 </div>
 
-                @*<div class="form-group">
+                <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <button type="submit" class="btn btn-success btn-quirk btn-stroke btn-xs"><i class="glyphicon glyphicon-floppy-disk"></i></button>
+                        <button type="submit" class="btn btn-success btn-quirk btn-stroke btn-xs"><i class="glyphicon glyphicon-floppy-disk"></i>Guardar
+                        </button>
                         <a class="btn btn-default btn-quirk btn-stroke btn-xs" href="@Url.Action("Index","Admin")"><i class="glyphicon glyphicon-arrow-left"></i></a>
                     </div>
-                </div>*@
+                </div>
             </div>
         </div>
     </div>

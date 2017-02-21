@@ -18,6 +18,71 @@ namespace Perchero.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        //get
+        public ActionResult Calcular()
+        {
+            var UserId = User.Identity.GetUserId();
+            Prenda prenda = new Prenda();
+            prenda.UserId = UserId;
+
+            ViewBag.TipoId = new SelectList(db.Tipoes, "Id", "Categoria");
+            ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre");
+            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId");
+            ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre");
+            return View(prenda);
+        }
+
+        //post
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public int Calcular(Prenda prenda, int[] TelaId = null, int[] Metros = null, int[] Cantidad = null, int[] AvioId = null)
+        //{
+        //    Tipo tipoPrenda = db.Tipoes.Where(x => x.Id == prenda.TipoId).FirstOrDefault();
+        //    var manoobra = tipoPrenda.Precio;
+        //    var preciotela = 0;
+        //    var precioavio = 0;
+        //    var precioprenda = 0;
+        //    foreach (var item in prenda.DetallePrendas)
+        //    {
+        //        Tela tela = db.Telas.Find(item.TelaId);
+        //        Avio avio = db.Avios.Find(item.AvioId);
+        //        preciotela += tela.Precio * (int)item.MetroTela;
+        //        precioavio += avio.Precio * item.CantidadAvio;
+        //    }
+        //    precioprenda = manoobra + preciotela + precioavio;
+        //    return precioprenda;
+        //}
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Calcular(Prenda prenda)
+        {
+            Tipo tipoPrenda = db.Tipoes.Where(x => x.Id == prenda.TipoId).FirstOrDefault();
+            var manoobra = tipoPrenda.Precio;
+            var preciotela = 0;
+            var precioavio = 0;
+            var precioprenda = 0;
+            foreach (var item in prenda.DetallePrendas)
+            {
+                Tela tela = db.Telas.Find(item.TelaId);
+                Avio avio = db.Avios.Find(item.AvioId);
+                preciotela += tela.Precio * (int)item.MetroTela;
+                precioavio += avio.Precio * item.CantidadAvio;
+                item.Avio = avio;
+                item.Tela = tela;
+            }
+            precioprenda = manoobra + preciotela + precioavio;
+            prenda.PrecioTotal = precioprenda;
+
+            ViewBag.TipoId = new SelectList(db.Tipoes, "Id", "Categoria");
+            ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre");
+            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId");
+            ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre");
+            //return precioprenda;
+            return View(prenda);
+        }
+
+
         public ActionResult Galeria()
         {
             var prendas = db.Prendas.Include(p => p.Tipo).Include(p => p.Usuario);
@@ -26,8 +91,9 @@ namespace Perchero.Controllers
         // GET: Prendas
         public ActionResult Index()
         {
+            var UserId = User.Identity.GetUserId();
             var prendas = db.Prendas.Include(p => p.Tipo).Include(p => p.Usuario);
-            return View(prendas.ToList());
+            return View(prendas.Where(x => x.UserId == UserId).ToList());
         }
 
         // GET: Prendas/Details/5
@@ -48,13 +114,15 @@ namespace Perchero.Controllers
         // GET: Prendas/Create
         public ActionResult Create()
         {
-            ViewBag.TipoId = new SelectList(db.Tipoes, "Id", "Nombre");
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre");
+            var UserId = User.Identity.GetUserId();
+            Prenda prenda = new Prenda();
+            prenda.UserId = UserId;
 
+            ViewBag.TipoId = new SelectList(db.Tipoes, "Id", "Categoria");
             ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre");
             ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId");
             ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre");
-            return View();
+            return View(prenda);
         }
 
         // POST: Prendas/Create
@@ -77,7 +145,7 @@ namespace Perchero.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TipoId = new SelectList(db.Tipoes, "Id", "Nombre", prenda.TipoId);
+            ViewBag.TipoId = new SelectList(db.Tipoes, "Id", "Categoria", prenda.TipoId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre", prenda.UserId);
 
             ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre");
@@ -98,7 +166,7 @@ namespace Perchero.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.TipoId = new SelectList(db.Tipoes, "Id", "Nombre", prenda.TipoId);
+            ViewBag.TipoId = new SelectList(db.Tipoes, "Id", "Categoria", prenda.TipoId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre", prenda.UserId);
 
             ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre");
@@ -140,7 +208,7 @@ namespace Perchero.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewBag.TipoId = new SelectList(db.Tipoes, "Id", "Nombre", prenda.TipoId);
+            ViewBag.TipoId = new SelectList(db.Tipoes, "Id", "Categoria", prenda.TipoId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre", prenda.UserId);
 
             ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre");
