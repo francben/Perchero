@@ -3,37 +3,68 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="contentpanel">
 
-<h2>Index</h2>
+    <ol class="breadcrumb breadcrumb-quirk">
+        <li>
+            <a href="@Url.Action("Index","Home")"><i class="fa fa-home mr5"></i>Inicio</a>
+        </li>
+        <li class="active">Categorias</li>
+    </ol>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Categoria)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Precio)
-        </th>
-        <th></th>
-    </tr>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                Categorias
+                <div class="pull-right">
+                    @Html.ActionLink("Crear nuevo", "Create", null, new { @class = "btn btn-default btn-xs" })
+                </div>
+            </h4>
+            <p></p>
+        </div>
+        <div class="panel-body">
+            <div class="content-page">
+                <div class="content">
+                    <div class="table-responsive">
+                        <table id="dataTable" class="table table-bordered table-striped-col">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Categoria)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Precio)
+                                    </th>
+                                    <th class="col-sm-1">
+                                        Opciones
+                                    </th>
+                                </tr>
+                            </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Categoria)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Precio)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+                            <tbody>
 
-</table>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Categoria)
+                                        </td>
+                                        <td>    
+                                            @Html.DisplayFor(modelItem => item.Precio)
+                                        </td>
+                                        <td class="col-sm-1 text-center">
+                                            <a href="@Url.Action("Edit", "Tipos", new {id = item.Id})"><i class="fa fa-pencil"></i></a>
+                                            <a href="@Url.Action("Details", "Tipos", new { id = item.Id })"><i class="fa fa-eye"></i></a>
+                                            <a href="@Url.Action("Delete", "Tipos", new { id = item.Id })"><i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- panel -->
+</div><!-- contentpanel -->

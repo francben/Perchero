@@ -3,7 +3,7 @@
     ViewBag.Title = "Create";
 }
 
-@using (Html.BeginForm("Calcular", "Prendas", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Calcular", "Prendas", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
 {
     @Html.AntiForgeryToken()
     <div class="contentpanel">
@@ -16,119 +16,114 @@
             <li class="active">Crear Prenda</li>
         </ol>
 
-        <div class="panel">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    Crear Prenda
+                    Nueva prenda
+                    <div class="pull-right">
+                        @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-default btn-xs" })
+                    </div>
                 </h4>
+                <p></p>
             </div>
-            <div class="panel-body form-horizontal">
-                <div class="form-group hidden">
-                    <div class="col-md-2">
-                        @Html.HiddenFor(model => model.UserId, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group hidden">
+                        <div class="col-md-12">
+                            @Html.HiddenFor(model => model.UserId, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.TipoId, "Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-2">
-                        @Html.Hidden("TipoId", null, htmlAttributes: new { @class = "form-control", @placeholder = "Buscar"})
-                        @Html.ValidationMessageFor(model => model.TipoId, "", new { @class = "text-danger" })
-                        <input class="form-control Tipo_Nombre text-box single-line valid" id="Tipo_Nombre" name="Categoria" type="text" value="" autocomplete="off" placeholder="Buscar">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TipoId, "Categoria", htmlAttributes: new { @class = " col-md-12" })
+                            <div class="col-md-12">
+                                @Html.Hidden("TipoId", null, htmlAttributes: new { @class = "form-control", @placeholder = "Buscar" })
+                                @Html.ValidationMessageFor(model => model.TipoId, "", new { @class = "text-danger" })
+                                <input class="form-control Tipo_Nombre text-box single-line valid" id="Tipo_Nombre" name="Categoria" type="text" value="" autocomplete="off" placeholder="Buscar">
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-2">
-                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Talle, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-2">
-                        @Html.EditorFor(model => model.Talle, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Talle, "", new { @class = "text-danger" })
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Talle, htmlAttributes: new { @class = "col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Talle, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Talle, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-
-                <div class="form-group">
-                        <label class="control-label col-md-2">Accesorios</label>
-                        @*<label id="tt"></label>*@
-                    <div class="col-md-2">
-                        @*tela*@
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Tela">
-                            Agregar accesorios
-                        </button>
-                    </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="Tela" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel">
-                                        Agregar Telas
-                                        <div class="pull-right">
-                                            <div id="sheepItForm_controls" class="btn btn-primary">
-                                                <div id="sheepItForm_add">
-                                                    <span>
-                                                        <i class="fa fa-plus" id="agt"> Agregar tela</i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal" id="lst">Listo</button>
-                                        </div>
-                                    </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div id="sheepItForm">
-                                        <div id="sheepItForm_template" class="form-group col-lg-12">
-                                            @*<label class="control-label col-lg-12" for="sheepItForm_#index#_tela">Telas <span id="sheepItForm_label"></span></label>*@
-                                            <div class="col-md-3">
-                                                @*@Html.EditorFor(model => model., new { htmlAttributes = new { @class = "form-control Tela_Nombre" } })*@
-                                                @Html.DropDownList("TelaId", null, "Selecionar Tela", htmlAttributes: new { @id = "sheepItForm_#index#_tela", @class = "form-control sheepItForm_#index#_tela", Name = "DetallePrendas[#index#].TelaId" })
-                                            </div>
-                                            <div class="col-md-2">
-                                                <input type="number" name="DetallePrendas[#index#].MetroTela" class="form-control" placeholder="Metros" id="sheepItForm_#index#_metros" />
-                                            </div>
-
-                                            @*<label class="col-md-2 control-label" for="sheepItForm2_#index#_avio">Avios <span id="sheepItForm2_label"></span></label>*@
-                                            <div class="col-md-3">
-                                                @*@Html.EditorFor(model => model., new { htmlAttributes = new { @class = "form-control Tela_Nombre" } })*@
-                                                @Html.DropDownList("AvioId", null, "Selecionar Avio", htmlAttributes: new { @id = "sheepItForm_#index#_avio", @class = "form-control sheepItForm_#index#_avio", Name = "DetallePrendas[#index#].AvioId" })
-
-                                            </div>
-                                            <div class="col-md-2">
-                                                <input type="number" name="DetallePrendas[#index#].CantidadAvio" class="form-control" placeholder="Cantidad" id="sheepItForm_#index#_cantidad" />
-                                            </div>
-                                            <div class="col-md-2">
-                                                <span class="btn btn-danger btn-block delete">
-                                                    <i class="fa fa-trash" id="sheepItForm_remove_current"> </i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div id="sheepItForm_noforms_template"></div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer" style="border:none;">
-                                </div>
+                    <div class="col-lg-12">
+                        <br>
+                        <div class="form-group pull-right">
+                            <div class="col-md-4">
+                                <input type="submit" value="Create" class="btn btn-default" />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Agregar accesorios
+                </h4>
+                <p></p>
+            </div>
+            <div class="panel-body form-horizontal">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="sheepItForm">
+                            <div id="sheepItForm_template" class="form-group">
+                                <div class="col-md-3">
+                                    @Html.DropDownList("TelaId", null, "Selecionar Tela", htmlAttributes: new { @id = "sheepItForm_#index#_tela", @class = "form-control sheepItForm_#index#_tela", Name = "DetallePrendas[#index#].TelaId" })
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="number" name="DetallePrendas[#index#].MetroTela" class="form-control" placeholder="Metros" id="sheepItForm_#index#_metros" />
+                                </div>
+
+                                <div class="col-md-3">
+                                    @Html.DropDownList("AvioId", null, "Selecionar Avio", htmlAttributes: new { @id = "sheepItForm_#index#_avio", @class = "form-control sheepItForm_#index#_avio", Name = "DetallePrendas[#index#].AvioId" })
+
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="number" name="DetallePrendas[#index#].CantidadAvio" class="form-control" placeholder="Cantidad" id="sheepItForm_#index#_cantidad" />
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="btn btn-danger btn-block delete">
+                                        <i class="fa fa-trash" id="sheepItForm_remove_current"> </i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div id="sheepItForm_noforms_template"></div>
+                        </div>
                     </div>
                 </div>
-
-
+            </div>
+            <div class="panel-footer">
+                <div class="text-right">
+                    <div id="sheepItForm_controls" class="btn btn-primary">
+                        <div id="sheepItForm_add">
+                            <span>
+                                <i class="fa fa-plus" id="agt"> Agregar tela</i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -234,10 +229,10 @@
                         onSelectItemEvent: function () {
                             console.log(cd);
                             //for (var i = 0; i < cnt; i++) {
-                            var TelaId = $(".sheepItForm_"+cd+"_tela").getSelectedItemData().Id;
+                            var TelaId = $(".sheepItForm_" + cd + "_tela").getSelectedItemData().Id;
                             console.log(TelaId);
                             $("#TelaId").val(TelaId).trigger("change");
-                            var precio = $(".sheepItForm_"+cd+"_tela").getSelectedItemData().Precio;
+                            var precio = $(".sheepItForm_" + cd + "_tela").getSelectedItemData().Precio;
                             console.log(precio);
                             //}
                         },

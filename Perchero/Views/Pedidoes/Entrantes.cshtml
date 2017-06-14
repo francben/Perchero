@@ -1,23 +1,27 @@
 ﻿@model IEnumerable<Perchero.Models.Pedido>
 
 @{
-    ViewBag.Title = "Entrantes";
+    ViewBag.Title = "Pedidos Entrantes";
 }
 
 <div class="contentpanel">
 
     <ol class="breadcrumb breadcrumb-quirk">
         <li>
-            <a href="index.html"><i class="fa fa-home mr5"></i> Home</a>
+            <a href="@Url.Action("Index","Home")"><i class="fa fa-home mr5"></i> Inicio</a>
         </li>
-        <li><a href="basic-tables.html">Tables</a></li>
-        <li class="active">Data Tables</li>
+        <li class="active">@ViewBag.Title</li>
     </ol>
 
-    <div class="panel">
+    <div class="panel panel-primary">
         <div class="panel-heading">
-            <h4 class="panel-title">Basic Styling</h4>
-            <p>DataTables has most features enabled by default, so all you need to do to use it with one of your own tables is to call the construction function.</p>
+            <h4 class="panel-title">
+                @ViewBag.Title
+                <div class="pull-right hidden">
+                    @Html.ActionLink("Crear nuevo", "Create", null, new { @class = "btn btn-default btn-xs" })
+                </div>
+            </h4>
+            <p></p>
         </div>
         <div class="panel-body">
             <div class="table-responsive">
@@ -30,7 +34,9 @@
                             <th>Seña</th>
                             <th>Saldo</th>
                             <th>Total</th>
-                            <th></th>
+                            <th>Estado</th>
+                            <th>Confeccion</th>
+                            <th class="col-sm-1">Opciones</th>
                         </tr>
                     </thead>
 
@@ -42,7 +48,9 @@
                             <th>Seña</th>
                             <th>Saldo</th>
                             <th>Total</th>
-                            <th></th>
+                            <th>Estado</th>
+                            <th>Confeccion</th>
+                            <th class="col-sm-1">Opciones</th>
                         </tr>
                     </tfoot>
 
@@ -56,18 +64,31 @@
                                 <td>@item.Seña</td>
                                 <td>@item.Saldo</td>
                                 <td>@item.Prenda.PrecioTotal</td>
-                                <td>
-                                    <ul class="table-options">
-                                        <li>
-                                            <a href="@Url.Action("Pago", "Pedidoes", new {id = item.Id})"><i class="fa fa-money"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="@Url.Action("Details", "Pedidoes", new { id = item.Id })"><i class="fa fa-eye"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="@Url.Action("Delete", "Pedidoes", new {id = item.Id})"><i class="fa fa-trash"></i></a>
-                                        </li>
-                                    </ul>
+                                @{
+                            if (item.Estado)
+                            {
+                                <td><span class="label label-success">Pagado</span></td>
+                            }
+                            else
+                            {
+                                <td><span class="label label-danger">Debe</span></td>
+                            }
+                                }
+                                @{
+                            if (item.Terminado)
+                            {
+                                <td><span class="label label-success">Terminado</span></td>
+                            }
+                            else
+                            {
+                                <td><span class="label label-warning">Pendiente</span></td>
+                            }
+                                }
+                                <td class="col-sm-1 text-center">
+                                    <a href="@Url.Action("Terminado", "Pedidoes", new { id = item.Id })"><i class="fa fa-check-square"></i></a>
+                                    <a href="@Url.Action("Pago", "Pedidoes", new {id = item.Id})"><i class="fa fa-money"></i></a>
+                                    <a href="@Url.Action("Details", "Pedidoes", new { id = item.Id })"><i class="fa fa-eye"></i></a>
+                                    <a href="@Url.Action("Delete", "Pedidoes", new {id = item.Id})"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         }

@@ -203,6 +203,10 @@
     <Compile Include="Migrations\201702202352484_ActualizarTipo.Designer.cs">
       <DependentUpon>201702202352484_ActualizarTipo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706132340582_Estado_terminado_en_pedido.cs" />
+    <Compile Include="Migrations\201706132340582_Estado_terminado_en_pedido.Designer.cs">
+      <DependentUpon>201706132340582_Estado_terminado_en_pedido.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Avio.cs" />
@@ -210,6 +214,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Pedido.cs" />
+    <Compile Include="Models\PedidosMes.cs" />
+    <Compile Include="Models\PedidosMesViewModel.cs" />
     <Compile Include="Models\Prenda.cs" />
     <Compile Include="Models\Tela.cs" />
     <Compile Include="Models\Tipo.cs" />
@@ -326,6 +332,7 @@
     <Content Include="Views\Pedidoes\Terminados.cshtml" />
     <Content Include="Views\Pedidoes\Pago.cshtml" />
     <Content Include="Views\Pedidoes\NotificacionEntrantes.cshtml" />
+    <Content Include="Views\Pedidoes\NotificacionEntrantesHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -363,6 +370,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702202352484_ActualizarTipo.resx">
       <DependentUpon>201702202352484_ActualizarTipo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706132340582_Estado_terminado_en_pedido.resx">
+      <DependentUpon>201706132340582_Estado_terminado_en_pedido.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

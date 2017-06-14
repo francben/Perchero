@@ -2,6 +2,7 @@
 {
     Response.Redirect("http://localhost:5900/Account/Login");
 }
+@using Microsoft.AspNet.Identity
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
         <div class="headerpanel">
 
             <div class="logopanel">
-                <h2><a href="">Perchero</a></h2>
+                <h2><a href="@Url.Action("Index", "Home")">Perchero</a></h2>
             </div><!-- logopanel -->
 
             <div class="headerbar">
@@ -55,7 +56,7 @@
                                                 <div role="tabpanel" class="tab-pane active" id="notification">
                                                     <ul class="list-group notice-list">
                                                         @{
-                                                            Html.RenderAction("NotificacionEntrantes", "Pedidoes");
+                            Html.RenderAction("NotificacionEntrantes", "Pedidoes");
                                                         }
                                                     </ul>
                                                     <a class="btn-more" href="@Url.Action("Entrantes", "Pedidoes")">Ver mas pedidos... <i class="fa fa-long-arrow-right"></i></a>
@@ -67,12 +68,7 @@
                             </li>
                         }
                         @Html.Partial("_LoginPartial")
-                        <li>
-                            <button id="chatview" class="btn btn-chat alert-notice">
-                                <span class="badge-alert"></span>
-                                <i class="fa fa-comments-o"></i>
-                            </button>
-                        </li>
+
                     </ul>
                 </div><!-- header-right -->
             </div><!-- headerbar -->
@@ -89,38 +85,51 @@
                 <div class="media leftpanel-profile">
                     <div class="media-left">
                         <a href="#">
-                            <img src="../images/photos/me.png" alt="" class="media-object img-circle">
+                            <img src="http://localhost:5900/images/photos/me.png" alt="" class="media-object img-circle">
                         </a>
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading">
-                            Elen Adarna
+                            @User.Identity.GetUserName()
                             <a data-toggle="collapse" data-target="#loguserinfo" class="pull-right"><i class="fa fa-angle-down"></i></a>
                         </h4>
-                        <span>Software Engineer</span>
+                        @if (User.IsInRole("Diseñador"))
+                        {
+                            <span>Diseñador</span>
+                        }
+                        @if (User.IsInRole("Cliente"))
+                        {
+                            <span>Cliente</span>
+                        }
                     </div>
                 </div><!-- leftpanel-profile -->
 
                 <div class="leftpanel-userinfo collapse" id="loguserinfo">
-                    <h5 class="sidebar-title">Address</h5>
+                    <h5 class="sidebar-title">Informacion</h5>
                     <address>
-                        4975 Cambridge Road
-                        Miami Gardens, FL 33056
+                        @if (User.IsInRole("Diseñador"))
+                        {
+                            <p>Crea tus prendas y publicalas</p>
+                        }
+                        @if (User.IsInRole("Cliente"))
+                        {
+                            <p>Con tu cuenta puedes realizar pedidos</p>
+                        }
                     </address>
-                    <h5 class="sidebar-title">Contact</h5>
+                    <h5 class="sidebar-title">Contacto</h5>
                     <ul class="list-group">
                         <li class="list-group-item">
                             <label class="pull-left">Email</label>
-                            <span class="pull-right">me@themepixels.com</span>
+                            <span class="pull-right">@User.Identity.GetUserName()</span>
                         </li>
-                        <li class="list-group-item">
+                        @*<li class="list-group-item">
                             <label class="pull-left">Home</label>
                             <span class="pull-right">(032) 1234 567</span>
                         </li>
                         <li class="list-group-item">
                             <label class="pull-left">Mobile</label>
                             <span class="pull-right">+63012 3456 789</span>
-                        </li>
+                        </li>*@
                         <li class="list-group-item">
                             <label class="pull-left">Social</label>
                             <div class="social-icons pull-right">
@@ -133,10 +142,10 @@
                 </div><!-- leftpanel-userinfo -->
 
                 <ul class="nav nav-tabs nav-justified nav-sidebar">
-                    <li class="tooltips active" data-toggle="tooltip" title="Main Menu">
+                    <li class="tooltips active" data-toggle="tooltip" title="Menu">
                         <a data-toggle="tab" data-target="#mainmenu"><i class="tooltips fa fa-ellipsis-h"></i></a>
                     </li>
-                    <li class="tooltips unread" data-toggle="tooltip" title="Check Mail">
+                    @*<li class="tooltips unread" data-toggle="tooltip" title="Check Mail">
                         <a data-toggle="tab" data-target="#emailmenu"><i class="tooltips fa fa-envelope"></i></a>
                     </li>
                     <li class="tooltips" data-toggle="tooltip" title="Contacts">
@@ -144,9 +153,9 @@
                     </li>
                     <li class="tooltips" data-toggle="tooltip" title="Settings">
                         <a data-toggle="tab" data-target="#settings"><i class="fa fa-cog"></i></a>
-                    </li>
-                    <li class="tooltips" data-toggle="tooltip" title="Log Out">
-                        <a href="signin.html"><i class="fa fa-sign-out"></i></a>
+                    </li>*@
+                    <li class="tooltips" data-toggle="tooltip" title="Cerrar sesión">
+                        <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i></a>
                     </li>
                 </ul>
 
@@ -155,7 +164,7 @@
                     <!-- ################# MAIN MENU ################### -->
 
                     <div class="tab-pane active" id="mainmenu">
-                        <h5 class="sidebar-title">Main Menu</h5>
+                        <h5 class="sidebar-title">Menu</h5>
                         <ul class="nav nav-pills nav-stacked nav-quirk">
                             @if (User.IsInRole("Administrador"))
                             {
@@ -168,43 +177,56 @@
                                     </ul>
                                 </li>
                             }
-                            <li class="nav-parent">
-                                <a href=""><i class="fa fa-cube"></i> <span>Tipos</span></a>
-                                <ul class="children">
-                                    <li><a href="@Url.Action("Create","Tipos")">Nuevo Tipo</a></li>
-                                    <li><a href="@Url.Action("Index","TIpos")">Lista de tipos</a></li>
-                                </ul>
-                            </li>
+                            @if (User.IsInRole("Administrador") || User.IsInRole("Diseñador"))
+                            {
+                                <li class="nav-parent">
+                                    <a href=""><i class="fa fa-cube"></i> <span>Tipos</span></a>
+                                    <ul class="children">
+                                        <li><a href="@Url.Action("Create","Tipos")">Nueva Categoria</a></li>
+                                        <li><a href="@Url.Action("Index","TIpos")">Lista de categorias</a></li>
+                                    </ul>
+                                </li>
+                            }
                             <li class="nav-parent">
                                 <a href=""><i class="fa fa-map-marker"></i> <span>Prendas</span></a>
                                 <ul class="children">
                                     <li><a href="@Url.Action("Create","Prendas")">Nueva prenda</a></li>
-                                    <li><a href="@Url.Action("Index","Prendas")">Lista de prendas</a></li>
+                                    @if (User.IsInRole("Administrador") || User.IsInRole("Diseñador"))
+                                    {
+                                        <li><a href="@Url.Action("Index","Prendas")">Lista de prendas</a></li>
+                                    }
                                     <li><a href="@Url.Action("Galeria","Prendas")">Galeria de prendas</a></li>
-                                    <li><a href="@Url.Action("Calcular","Prendas")">Calculadora de prendas</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-parent">
-                                <a href=""><i class="fa fa-check-square"></i> <span>Telas</span></a>
-                                <ul class="children">
-                                    <li><a href="@Url.Action("Create","Telas")">Nueva tela</a></li>
-                                    <li><a href="@Url.Action("Index","Telas")">Lista de telas</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-parent">
-                                <a href=""><i class="fa fa-suitcase"></i> <span>Avios</span></a>
-                                <ul class="children">
-                                    <li><a href="@Url.Action("Create","Avios")">Nuevo Avio</a></li>
-                                    <li><a href="@Url.Action("Index","Avios")">Lista de Avios</a></li>
-                                </ul>
-                            </li>
+                            @if (User.IsInRole("Administrador") || User.IsInRole("Diseñador"))
+                            {
+                                <li class="nav-parent">
+                                    <a href=""><i class="fa fa-check-square"></i> <span>Telas</span></a>
+                                    <ul class="children">
+                                        <li><a href="@Url.Action("Create","Telas")">Nueva tela</a></li>
+                                        <li><a href="@Url.Action("Index","Telas")">Lista de telas</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-parent">
+                                    <a href=""><i class="glyphicon glyphicon-tower"></i> <span>Avios</span></a>
+                                    <ul class="children">
+                                        <li><a href="@Url.Action("Create","Avios")">Nuevo Avio</a></li>
+                                        <li><a href="@Url.Action("Index","Avios")">Lista de Avios</a></li>
+                                    </ul>
+                                </li>
+                            }
                             <li class="nav-parent">
                                 <a href=""><i class="fa fa-th-list"></i> <span>Pedidos</span></a>
                                 <ul class="children">
-                                    <li><a href="@Url.Action("Create","Pedidoes")">Nuevo Pedido</a></li>
-                                    <li><a href="@Url.Action("Index","Pedidoes")">Mis Pedidos</a></li>
-                                    <li><a href="@Url.Action("Entrantes","Pedidoes")">Entrantes</a></li>
-                                    <li><a href="@Url.Action("Terminados","Pedidoes")">Terminados</a></li>
+                                    @if (User.IsInRole("Administrador") || User.IsInRole("Cliente"))
+                                    {
+                                        <li><a href="@Url.Action("Index","Pedidoes")">Mis Pedidos</a></li>
+                                    }
+                                    @if (User.IsInRole("Administrador") || User.IsInRole("Diseñador"))
+                                    {
+                                        <li><a href="@Url.Action("Entrantes","Pedidoes")">Entrantes</a></li>
+                                        <li><a href="@Url.Action("Terminados","Pedidoes")">Terminados</a></li>
+                                    }
                                 </ul>
                             </li>
                         </ul>
@@ -429,7 +451,7 @@
     @RenderSection("scripts", required: false)
     <script>
         $(document).ready(function () {
-            
+
             var oTable = $('#dataTable').DataTable({
                 "bProcessing": true,
                 "sPaginationType": "full_numbers",
@@ -471,4 +493,5 @@
         });
     </script>
 </body>
+
 </html>

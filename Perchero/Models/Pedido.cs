@@ -15,6 +15,7 @@ namespace Perchero.Models
         public int PrendaId { get; set; }
         [ForeignKey("PrendaId")]
         public virtual Prenda Prenda { get; set; }
+        [Display(Name = "Cliente")]
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser Usuario { get; set; }
@@ -37,5 +38,6 @@ namespace Perchero.Models
         [Required(ErrorMessage = "Este campo es requerido")]
         public double Saldo { get; set; }
         public bool Estado { get; set; }
+        public  bool Terminado { get; set; }
     }
 }

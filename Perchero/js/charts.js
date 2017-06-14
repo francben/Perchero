@@ -5,10 +5,11 @@ $(document).ready(function () {
 
     /***** BAR CHART *****/
 
-    var bardata = [['Jan', 10], ['Feb', 23], ['Mar', 18], ['Apr', 13], ['May', 17], ['Jun', 30],
-									 ['Jul', 26], ['Aug', 16], ['Sep', 17], ['Oct', 5], ['Nov', 8], ['Dec', 15]];
+    //var bardata = [['Jan', 10], ['Feb', 23], ['Mar', 18], ['Apr', 13], ['May', 17], ['Jun', 30],
+	//								 ['Jul', 26], ['Aug', 16], ['Sep', 17], ['Oct', 5], ['Nov', 8], ['Dec', 15]];
 
-	 $.plot('#barchart', [ bardata ], {
+
+    $.plot('#barchart',  datos , {
 		  series: {
             lines: {
               lineWidth: 1

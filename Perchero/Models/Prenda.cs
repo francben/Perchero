@@ -16,6 +16,7 @@ namespace Perchero.Models
         }
         [HiddenInput(DisplayValue = true)]
         public int Id { get; set; }
+        [Display(Name = "Diseñador")]
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser Usuario { get; set; }

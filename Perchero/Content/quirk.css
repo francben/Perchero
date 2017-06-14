@@ -13456,6 +13456,7 @@ fieldset[disabled] .btn-fb.active {
 .filemanager .thmb-prev {
   background-color: #eee;
   overflow: hidden;
+  vertical-align: middle;
 }
 .filemanager .thmb-prev a {
   display: block;

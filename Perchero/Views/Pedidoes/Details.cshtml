@@ -1,66 +1,90 @@
 ﻿@model Perchero.Models.Pedido
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
 }
+<div class="contentpanel">
 
-<h2>Details</h2>
+    <ol class="breadcrumb breadcrumb-quirk">
+        <li><a href="@Url.Action("Index","Home")i class=" fa fa-home mr5"></i> Inicio</a></li>
+        @if (User.IsInRole("Diseñador"))
+        {
+            <li><a href="@Url.Action("Entrantes","Pedidoes")">Pedidos Entrantes</a></li>
+        }
+        @if (User.IsInRole("Cliente"))
+        {
+            <li><a href="@Url.Action("Index","Pedidoes")">Mis Pedidos</a></li>
+        }
+        <li class="active">Detalles</li>
+    </ol>
+    <div class="panel panel-primary panel-profile list-view">
+        <div class="panel-heading">
+            <div class="media">
+                <div class="media-body">
+                    <h4 class="media-heading" style="color: white;">
+                        @ViewBag.Title
+                        <div class="pull-right">
+                            @if (User.IsInRole("Diseñador"))
+                            {
+                                @Html.ActionLink("Volver", "Entrantes", null, new { @class = "btn btn-default btn-xs" })
+                            }
+                            @if (User.IsInRole("Cliente"))
+                            {
+                                @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-default btn-xs" })
+                            }
 
-<div>
-    <h4>Pedido</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Prenda.UserId)
-        </dt>
+                        </div>
+                    </h4>
+                    <p class="media-usermeta"><i class="glyphicon glyphicon-briefcase"></i> Pedido</p>
+                </div>
+            </div><!-- media -->
+        </div><!-- panel-heading -->
 
-        <dd>
-            @Html.DisplayFor(model => model.Prenda.UserId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario.Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Usuario.Nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaPedido)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaPedido)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaEntrega)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaEntrega)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Seña)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Seña)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Saldo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Saldo)
-        </dd>
-
-    </dl>
+        <div class="panel-body people-info">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="info-group">
+                        <label>@Html.DisplayNameFor(model => model.Prenda.UserId)</label>
+                        @Html.DisplayFor(model => model.Prenda.Usuario.Nombre) @Html.DisplayFor(model => model.Prenda.Usuario.Apellido)
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="info-group">
+                        <label>@Html.DisplayNameFor(model => model.UserId)</label>
+                        @Html.DisplayFor(model => model.Usuario.Nombre) @Html.DisplayFor(model => model.Usuario.Apellido)
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="info-group">
+                        <label>@Html.DisplayNameFor(model => model.FechaPedido)</label>
+                        @String.Format("{0:dd/MM/yyyy}", Model.FechaPedido)
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="info-group">
+                        <label>@Html.DisplayNameFor(model => model.FechaEntrega)</label>
+                        @String.Format("{0:dd/MM/yyyy}", Model.FechaEntrega)
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="info-group">
+                        <label>@Html.DisplayNameFor(model => model.Seña)</label>
+                        @Html.DisplayFor(model => model.Seña)
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="info-group">
+                        <label>@Html.DisplayNameFor(model => model.Saldo)</label>
+                        @Html.DisplayFor(model => model.Saldo)
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="info-group">
+                        <label>@Html.DisplayNameFor(model => model.Prenda.PrecioTotal)</label>
+                        @Html.DisplayFor(model => model.Prenda.PrecioTotal)
+                    </div>
+                </div>
+            </div><!-- row -->
+        </div>
+    </div><!-- panel -->
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

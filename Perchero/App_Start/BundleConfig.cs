@@ -21,20 +21,10 @@ namespace Perchero
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/lib/jquery/jquery.js",
+                      //"~/lib/jquery/jquery.js",
                       "~/lib/jquery-ui/jquery-ui.js",
                       "~/lib/bootstrap/js/bootstrap.js",
                       "~/lib/jquery-toggles/toggles.js",
-                      "~/lib/flot/jquery.flot.js",
-                      "~/lib/flot/jquery.flot.resize.js",
-                      "~/lib/flot/jquery.flot.symbol.js",
-                      "~/lib/flot/jquery.flot.crosshair.js",
-                      "~/lib/flot/jquery.flot.categories.js",
-                      "~/lib/flot/jquery.flot.pie.js",
-                      "~/lib/flot-spline/jquery.flot.spline.js",
-                      "~/lib/morrisjs/morris.js",
-                      "~/lib/raphael/raphael.js",
-                      "~/lib/jquery-sparkline/jquery.sparkline.js",
                       //"~/lib/timepicker/jquery.timepicker.js",
                       "~/Scripts/bootstrap.file-input.js",
                       "~/Scripts/fileinput.min.js",
@@ -44,8 +34,25 @@ namespace Perchero
                       "~/Scripts/jquery.easy-autocomplete.min.js",
                       "~/lib/datatables/jquery.dataTables.js",
                       "~/lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js",
-                      "~/js/quirk.js",
-                      "~/js/charts.js"
+                      "~/js/quirk.js"
+                      ));
+            bundles.Add(new ScriptBundle("~/bundles/amcharts").Include(
+                      "~/amcharts/amcharts.js",
+                      "~/amcharts/serial.js",
+                      "~/amcharts/pie.js",
+                      "~/amcharts/themes/light.js",
+                      "~/amcharts/plugins/export/export.min.js"
+            ));
+
+            bundles.Add(new ScriptBundle("~/bundles/flot").Include(
+                      "~/lib/flot/jquery.flot.js",
+                      "~/lib/flot/jquery.flot.resize.js",
+                      "~/lib/flot/jquery.flot.symbol.js",
+                      "~/lib/flot/jquery.flot.crosshair.js",
+                      "~/lib/flot/jquery.flot.categories.js",
+                      "~/lib/flot/jquery.flot.pie.js",
+                      "~/lib/flot-spline/jquery.flot.spline.js",
+                      "~/lib/jquery-sparkline/jquery.sparkline.js"
                       ));
 
 
@@ -61,6 +68,7 @@ namespace Perchero
                       "~/Content/jquery.bsPhotoGallery.css",
                       "~/Content/easy-autocomplete.min.css",
                        "~/lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css",
+                      "~/amcharts/plugins/export/export.css",
                       "~/Content/quirk.css"));
         }
     }

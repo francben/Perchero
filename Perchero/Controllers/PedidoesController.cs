@@ -22,6 +22,7 @@ namespace Perchero.Controllers
             Prenda p = db.Prendas.Find(PrendaId);
             pedido.Prenda = p;
             pedido.PrendaId = p.Id;
+            pedido.Prenda.Nombre = p.Nombre;
             pedido.PrendaId = PrendaId;
             pedido.UserId = userid;
             string fechaP = DateTime.Now.ToString("yyyy-MM-dd");
@@ -59,19 +60,19 @@ namespace Perchero.Controllers
             var pedidoes = db.Pedidoes.Include(p => p.Prenda).Include(p => p.Usuario);
             if (User.IsInRole("Administrador"))
             {
-                return View(pedidoes.ToList());
+                return View(pedidoes.OrderByDescending(x => x.FechaPedido).ToList());
             }
             else
             {
                 var userid = User.Identity.GetUserId();
-                return View(pedidoes.Where(x => x.UserId == userid).ToList());
+                return View(pedidoes.Where(x => x.UserId == userid).OrderByDescending(x => x.FechaPedido).ToList());
             }
 
         }
 
         public JsonResult getBarPedidos()
         {
-            var query = db.Pedidoes.GroupBy(x => x.FechaPedido.Month).Select(s => new { mes = s.FirstOrDefault().FechaPedido.Month, cantidad = s.Count() } ).ToList();
+            var query = db.Pedidoes.GroupBy(x => x.FechaPedido.Month).Select(s => new { mes = s.FirstOrDefault().FechaPedido.Month, cantidad = s.Count() }).ToList();
             return Json(query, JsonRequestBehavior.AllowGet);
         }
 
@@ -93,7 +94,7 @@ namespace Perchero.Controllers
         // GET: Pedidoes/Create
         public ActionResult Create()
         {
-            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId");
+            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "Nombre");
             ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre");
             return View();
         }
@@ -112,7 +113,7 @@ namespace Perchero.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId", pedido.PrendaId);
+            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "Nombre", pedido.PrendaId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre", pedido.UserId);
             return View(pedido);
         }
@@ -143,6 +144,16 @@ namespace Perchero.Controllers
             }
             return View();
         }
+        public ActionResult NotificacionEntrantesHome()
+        {
+            var UserId = User.Identity.GetUserId();
+            List<Pedido> lista = db.Pedidoes.Where(x => x.Estado == false).Where(x => x.Prenda.UserId == UserId).ToList();
+            if (lista != null || lista.Count > 0)
+            {
+                return View(lista);
+            }
+            return View();
+        }
 
         // GET: Pedidoes/Edit/5
         public ActionResult Edit(int? id)
@@ -156,7 +167,7 @@ namespace Perchero.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId", pedido.PrendaId);
+            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "Nombre", pedido.PrendaId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre", pedido.UserId);
             return View(pedido);
         }
@@ -174,10 +185,28 @@ namespace Perchero.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId", pedido.PrendaId);
+            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "Nombre", pedido.PrendaId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre", pedido.UserId);
             return View(pedido);
         }
+
+        public ActionResult Terminado(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Pedido pedido = db.Pedidoes.Find(id);
+            if (pedido == null)
+            {
+                return HttpNotFound();
+            }
+            pedido.Terminado = true;
+            db.Entry(pedido).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
 
         // GET: Pedidoes/Edit/5
         public ActionResult Pago(int? id)
@@ -193,7 +222,7 @@ namespace Perchero.Controllers
             }
             pedido.Seña = pedido.Saldo;
 
-            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId", pedido.PrendaId);
+            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "Nombre", pedido.PrendaId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre", pedido.UserId);
             return View(pedido);
         }
@@ -223,7 +252,7 @@ namespace Perchero.Controllers
                 }
                 return RedirectToAction("Entrantes");
             }
-            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId", pedido.PrendaId);
+            ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "Nombre", pedido.PrendaId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre", pedido.UserId);
             return View(pedido);
             

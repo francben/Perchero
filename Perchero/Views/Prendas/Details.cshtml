@@ -1,101 +1,124 @@
 ﻿@model Perchero.Models.Prenda
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
 }
+<div class="contentpanel">
 
-<h2>Details</h2>
+    <ol class="breadcrumb breadcrumb-quirk">
+        <li>
+            <a href="@Url.Action("Index","Home")"><i class="fa fa-home mr5"></i> Inicio</a>
+        </li>
+        <li><a href="@Url.Action("Index","Prendas")">Prendas</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+    <div class="panel panel-primary panel-profile list-view">
+        <div class="panel-heading">
+            <div class="media">
+                <div class="media-body">
+                    <h4 class="media-heading" style="color: white;">
+                        @ViewBag.Title
+                        <div class="pull-right">
+                            @if (User.IsInRole("Diseñador"))
+                            {
+                                @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning btn-xs" })
+                                @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-default btn-xs" })
+                            }
+                            @if (User.IsInRole("Cliente"))
+                            {
+                                @Html.ActionLink("Volver", "Galeria", null, new { @class = "btn btn-default btn-xs" })
+                            }
+                        </div>
+                    </h4>
+                    <p class="media-usermeta"><i class="glyphicon glyphicon-briefcase"></i> Prenda</p>
+                </div>
+            </div><!-- media -->
+        </div><!-- panel-heading -->
 
-<div>
-    <h4>Prenda</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Tipo.Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tipo.Nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario.Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Usuario.Nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Imagen)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Imagen)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Talle)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Talle)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Vitrina)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Vitrina)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PrecioTotal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PrecioTotal)
-        </dd>
-
-    </dl>
+        <div class="panel-body people-info">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="info-group">
+                        <label>@Html.DisplayNameFor(model => model.Tipo.Categoria)</label>
+                        @Html.DisplayFor(model => model.Tipo.Categoria)
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="info-group">
+                        <label>@Html.DisplayNameFor(model => model.Usuario.Nombre)</label>
+                        @Html.DisplayFor(model => model.Usuario.Nombre)
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="info-group">
+                        <label>@Html.DisplayNameFor(model => model.Nombre)</label>
+                        @Html.DisplayFor(model => model.Nombre)
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="info-group">
+                        <label>@Html.DisplayNameFor(model => model.Imagen)</label>
+                        @Html.DisplayFor(model => model.Imagen)
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="info-group">
+                        <label>@Html.DisplayNameFor(model => model.Talle)</label>
+                        @Html.DisplayFor(model => model.Talle)
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="info-group">
+                        <label>@Html.DisplayNameFor(model => model.Vitrina)</label>
+                        @Html.DisplayFor(model => model.Vitrina)
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="info-group">
+                        <label>@Html.DisplayNameFor(model => model.PrecioTotal)</label>
+                        @Html.DisplayFor(model => model.PrecioTotal)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-heading">
+            <div class="media">
+                <div class="media-body">
+                    <h4 class="media-heading" style="color: white;">
+                        @ViewBag.Title
+                    </h4>
+                    <p class="media-usermeta"><i class="glyphicon glyphicon-list"></i> Accesorios</p>
+                </div>
+            </div><!-- media -->
+        </div><!-- panel-heading -->
+        <div class="panel-body people-info">
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped-col">
+                        <thead>
+                            <tr>
+                                <th>Tela</th>
+                                <th>Metro</th>
+                                <th>Avio</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var item in Model.DetallePrendas)
+                                {
+                                    <tr>
+                                        <td>@item.Tela.Nombre</td>
+                                        <td>@item.MetroTela</td>
+                                        <td>@item.Avio.Nombre</td>
+                                        <td>@item.CantidadAvio</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- row -->
+        </div>
+    </div><!-- panel -->
 </div>
-
-
-
-<table>
-    <thead>
-        <tr>
-            <th>Tela</th>
-            <th>Metro</th>
-            <th>Avio</th>
-            <th>Cantidad</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            foreach (var item in Model.DetallePrendas)
-            {
-                <tr>
-                    <td>@item.Tela.Nombre</td>
-                    <td>@item.MetroTela</td>
-                    <td>@item.Avio.Nombre</td>
-                    <td>@item.CantidadAvio</td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
-
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

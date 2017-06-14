@@ -93,7 +93,7 @@ namespace Perchero.Controllers
         {
             var UserId = User.Identity.GetUserId();
             var prendas = db.Prendas.Include(p => p.Tipo).Include(p => p.Usuario);
-            return View(prendas.Where(x => x.UserId == UserId).ToList());
+            return View(prendas.Where(x => x.UserId == UserId).OrderByDescending(x => x.Id).ToList());
         }
 
         // GET: Prendas/Details/5

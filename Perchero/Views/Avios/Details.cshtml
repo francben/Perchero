@@ -1,34 +1,47 @@
 ﻿@model Perchero.Models.Avio
-
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
 }
+<div class="contentpanel">
 
-<h2>Details</h2>
+    <ol class="breadcrumb breadcrumb-quirk">
+        <li>
+            <a href="@Url.Action("Index","Home")"><i class="fa fa-home mr5"></i> Inicio</a>
+        </li>
+        <li><a href="@Url.Action("Index", "Avios")">Avios</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+    <div class="panel panel-primary panel-profile list-view">
+        <div class="panel-heading">
+            <div class="media">
+                <div class="media-body">
+                    <h4 class="media-heading" style="color: white;">
+                        @ViewBag.Title
+                        <div class="pull-right">
+                            @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning btn-xs" })
+                            @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-default btn-xs" })
+                        </div>
+                    </h4>
+                    <p class="media-usermeta"><i class="glyphicon glyphicon-briefcase"></i> Avios</p>
+                </div>
+            </div><!-- media -->
+        </div><!-- panel-heading -->
 
-<div>
-    <h4>Avio</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Precio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Precio)
-        </dd>
-
-    </dl>
+        <div class="panel-body people-info">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="info-group">
+                        <label>@Html.DisplayNameFor(model => model.Nombre)</label>
+                        @Html.DisplayFor(model => model.Nombre)
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="info-group">
+                        <label>@Html.DisplayNameFor(model => model.Precio)</label>
+                        @Html.DisplayFor(model => model.Precio)
+                    </div>
+                </div>
+            </div><!-- row -->
+        </div>
+    </div><!-- panel -->
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
