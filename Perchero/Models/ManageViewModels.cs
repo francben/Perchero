@@ -7,11 +7,19 @@ namespace Perchero.Models
 {
     public class IndexViewModel
     {
+        public string Id { get; set; }
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Direccion { get; set; }
+        public string Telefono { get; set; }
+        public string Empresa { get; set; }
+        [DataType(DataType.ImageUrl)]
+        public string Imagen { get; set; }
     }
 
     public class ManageLoginsViewModel

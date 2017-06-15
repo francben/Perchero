@@ -7,12 +7,15 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Perchero.Models;
+using System.Net;
+using System.Data.Entity;
 
 namespace Perchero.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -64,16 +67,56 @@ namespace Perchero.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            ApplicationUser usuario = UserManager.FindById(userId);
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                Nombre = usuario.Nombre,
+                Apellido = usuario.Apellido,
+                Direccion = usuario.Direccion,
+                Telefono = usuario.Telefono,
+                Empresa = usuario.Empresa,
+                Imagen = usuario.Imagen,
+                Id = usuario.Id
             };
             return View(model);
         }
+
+        //Editar perfil
+        public ActionResult Edit(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser usuario = db.Users.Where(a => a.Id == id).FirstOrDefault();
+            if (usuario == null)
+            {
+                return HttpNotFound();
+            }
+            return View(usuario);
+        }
+
+        // POST: Perfil/Edit/5
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ApplicationUser usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(usuario).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(usuario);
+        }
+
 
         //
         // POST: /Manage/RemoveLogin

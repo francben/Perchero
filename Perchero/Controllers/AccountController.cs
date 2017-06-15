@@ -81,6 +81,7 @@ namespace Perchero.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    bool sesion = inicioSesion(model.Email);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -91,6 +92,28 @@ namespace Perchero.Controllers
                     ModelState.AddModelError("", "Intento de inicio de sesión no válido.");
                     return View(model);
             }
+        }
+        //
+        public string buscarNombre(string email)
+        {
+            var user = db.Users.Where(x => x.Email == email).FirstOrDefault();
+
+            return user.Nombre;
+        }
+        //uso de cookies sesion
+        public bool inicioSesion(string email)
+        {
+            ApplicationUser usuario = UserManager.FindByEmail(email);
+            if (usuario == null)
+            {
+                return false;
+            }
+            HttpCookie Cook = HttpContext.Request.Cookies["Cook"] ?? new HttpCookie("Cook");
+            Cook.Values["Nombre"] = usuario.Nombre;
+            Cook.Values["Apellido"] = usuario.Apellido;
+            Cook.Expires.Add(TimeSpan.FromDays(1.0));
+            Response.Cookies.Add(Cook);
+            return true;
         }
 
         //
@@ -399,7 +422,20 @@ namespace Perchero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            HttpCookie aCookie;
+            string NombreCookie;
+            int limit = Request.Cookies.Count;
+            for (int i = 0; i < limit; i++)
+            {
+                NombreCookie = Request.Cookies[i].Name;
+                aCookie = new HttpCookie(NombreCookie);
+                aCookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(aCookie);
+            }
+            HttpContext.Request.Cookies["Cook"].Expires = DateTime.Now.AddDays(-1);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session.Abandon();
+            Session.RemoveAll();
             return RedirectToAction("Index", "Home");
         }
 

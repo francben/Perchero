@@ -3,6 +3,16 @@
     Response.Redirect("http://localhost:5900/Account/Login");
 }
 @using Microsoft.AspNet.Identity
+
+@{
+    HttpCookie Cook = Request.Cookies["Cook"];
+    if (Cook != null)
+    {
+        ViewBag.Nombre = Cook.Values["Nombre"];
+        ViewBag.Apellido = Cook.Values["Apellido"];
+    }
+}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,17 +100,18 @@
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading">
-                            @User.Identity.GetUserName()
+                            @*@User.Identity.GetUserName()*@
+                            @ViewBag.Nombre @ViewBag.Apellido
                             <a data-toggle="collapse" data-target="#loguserinfo" class="pull-right"><i class="fa fa-angle-down"></i></a>
                         </h4>
-                        @if (User.IsInRole("Diseñador"))
+                        @*@if (User.IsInRole("Diseñador"))
                         {
                             <span>Diseñador</span>
                         }
                         @if (User.IsInRole("Cliente"))
                         {
                             <span>Cliente</span>
-                        }
+                        }*@
                     </div>
                 </div><!-- leftpanel-profile -->
 

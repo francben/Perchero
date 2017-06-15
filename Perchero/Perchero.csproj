@@ -207,6 +207,10 @@
     <Compile Include="Migrations\201706132340582_Estado_terminado_en_pedido.Designer.cs">
       <DependentUpon>201706132340582_Estado_terminado_en_pedido.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706142340036_Borrado_logico_pedido_bolean.cs" />
+    <Compile Include="Migrations\201706142340036_Borrado_logico_pedido_bolean.Designer.cs">
+      <DependentUpon>201706142340036_Borrado_logico_pedido_bolean.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Avio.cs" />
@@ -333,6 +337,7 @@
     <Content Include="Views\Pedidoes\Pago.cshtml" />
     <Content Include="Views\Pedidoes\NotificacionEntrantes.cshtml" />
     <Content Include="Views\Pedidoes\NotificacionEntrantesHome.cshtml" />
+    <Content Include="Views\Manage\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -373,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706132340582_Estado_terminado_en_pedido.resx">
       <DependentUpon>201706132340582_Estado_terminado_en_pedido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706142340036_Borrado_logico_pedido_bolean.resx">
+      <DependentUpon>201706142340036_Borrado_logico_pedido_bolean.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

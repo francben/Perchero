@@ -39,5 +39,6 @@ namespace Perchero.Models
         public double Saldo { get; set; }
         public bool Estado { get; set; }
         public  bool Terminado { get; set; }
+        public bool Eliminado { get; set; }
     }
 }
