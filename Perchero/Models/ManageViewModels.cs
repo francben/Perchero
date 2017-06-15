@@ -20,6 +20,7 @@ namespace Perchero.Models
         public string Empresa { get; set; }
         [DataType(DataType.ImageUrl)]
         public string Imagen { get; set; }
+        public string Email { get; set; }
     }
 
     public class ManageLoginsViewModel

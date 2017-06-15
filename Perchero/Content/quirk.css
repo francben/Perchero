@@ -6532,8 +6532,8 @@ button.close {
 }
 .center-block {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 20%;
+  margin-right: 0 auto;
 }
 .pull-right {
   float: right !important;
@@ -14515,4 +14515,18 @@ fieldset[disabled] .btn-fb.active {
 }
 .paddingtop20 {
   padding-top: 20px;
+}
+.contenedor {
+ margin-right: auto;
+  margin-left: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.centro {
+  position: absolute;
+  width: 50%;
+  margin: 0 auto;
+  left: 10%;
+  top: 10%;
+  text-align:center;
 }

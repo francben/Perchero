@@ -81,7 +81,8 @@ namespace Perchero.Controllers
                 Telefono = usuario.Telefono,
                 Empresa = usuario.Empresa,
                 Imagen = usuario.Imagen,
-                Id = usuario.Id
+                Id = usuario.Id,
+                Email = usuario.Email
             };
             return View(model);
         }
