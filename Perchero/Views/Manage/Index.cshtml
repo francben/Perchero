@@ -19,7 +19,6 @@
                         <i class="glyphicon glyphicon-user"></i> @ViewBag.Title
                         <div class="pull-right">
                             @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning btn-xs" })
-                            @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-default btn-xs" })
                         </div>
                     </h4>
                 </div>
@@ -28,134 +27,136 @@
 
         <p class="text-success">@ViewBag.StatusMessage</p>
         <div class="container">
-            <div class="login-wrap animated flipInX col-md-3">
+            <div class="login-wrap animated flipInX col-md-3" style="height:300px;">
                 <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object img-circle" src="~/images/default-user.png" alt="">
-                        </a>
-                    </div>
+                    <center><h4 class="media-heading">@Model.Nombre @Model.Apellido</h4>
+                    <p class="media-usermeta"><i class="fa fa-group"></i> Cliente</p></center>
                     <div class="media-body">
-                        <h4 class="media-heading">@Model.Nombre @Model.Apellido</h4>
-                        <p class="media-usermeta"><i class="fa fa-group"></i> Cliente</p>
+                        <center><img class="media-object img-circle" src="~/images/default-user.png" alt="" style="height:70%; width:80%;"></center>
                     </div>
                 </div><!-- media -->
+            </div>
+            <div class="panel-body people-info col-md-9">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="info-group">
+                            <label>Direccion</label>
+                            @Model.Direccion
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="info-group">
+                            <label>Correo</label>
+                            @Model.Email
+                        </div>
+                    </div>
                 </div>
-                <div class="panel-body people-info">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="info-group">
-                                <label>Direccion</label>
-                                @Model.Direccion
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="info-group">
-                                <label>Correo</label>
-                                @Model.Email
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="info-group">
-                                <label>Contraseña</label>
-                                <h4>
-                                    @if (Model.HasPassword)
-                                    {
-                                        @Html.ActionLink("Cambiar la contraseña", "ChangePassword")
-                                    }
-                                    else
-                                    {
-                                        @Html.ActionLink("Crear", "SetPassword")
-                                    }
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="info-group">
+                            <label>Contraseña</label>
+                            <h4>
+                                @if (Model.HasPassword)
+                                {
+                                    <a>***********</a>
+                                    @Html.ActionLink("Cambiar la contraseña", "ChangePassword", null, new { @class = "btn btn-xs btn-primary" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Crear", "SetPassword")
+                                }
                             </h4>
                         </div>
                     </div>
-                    </div><!-- row -->
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="info-group">
-                                <label>Telefono</label>
+
+                    <div class="col-sm-6">
+                        <div class="info-group" style="height:85px;">
+                            <label>Telefono</label>
+                            <h4>
                                 @Model.Telefono
+                            </h4>
+                        </div>
+                    </div>
+                </div><!-- row -->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="info-group">
+                            <label>Following</label>
+                            <h4>232</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="info-group">
+                            <label>Social</label>
+                            <div class="social-account-list">
+                                <i class="fa fa-facebook-official"></i>
+                                <i class="fa fa-twitter"></i>
+                                <i class="fa fa-skype"></i>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="info-group">
-                                <label>Following</label>
-                                <h4>232</h4>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="info-group">
-                                <label>Social</label>
-                                <div class="social-account-list">
-                                    <i class="fa fa-facebook-official"></i>
-                                    <i class="fa fa-twitter"></i>
-                                    <i class="fa fa-skype"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- row -->
-                </div>
-
-                @*<dt>Inicios de sesión externos:</dt>
-            <dd>
-                @Model.Logins.Count [
-                @Html.ActionLink("Administrar", "ManageLogins") ]
-            </dd>*@
-                @*
-            Los números de teléfono se pueden usar como un segundo factor de comprobación en un sistema de autenticación en dos fases.
-
-             Consulte <a href="http://go.microsoft.com/fwlink/?LinkId=403804">este artículo</a>
-                para obtener más información acerca de la configuración de esta aplicación ASP.NET para admitir la autenticación en dos fases con SMS.
-
-             Quite la marca de comentario del siguiente bloque una vez haya configurado la autenticación en dos fases
-                *@
-                @*
-            <dt>Número de teléfono:</dt>
-            <dd>
-                @(Model.PhoneNumber ?? "Ninguno") [
-                @if (Model.PhoneNumber != null)
-                {
-                    @Html.ActionLink("Cambiar", "AddPhoneNumber")
-                    @: &nbsp;|&nbsp;
-                    @Html.ActionLink("Quitar", "RemovePhoneNumber")
-                }
-                else
-                {
-                    @Html.ActionLink("Agregar", "AddPhoneNumber")
-                }
-                ]
-            </dd>
-                *@
-                @*<dt>Autenticación de dos factores:</dt>
-            <dd>
-                <p>
-                    No hay ningún proveedor de autenticación en dos fases configurado. Consulte <a href="http://go.microsoft.com/fwlink/?LinkId=403804">este artículo</a>
-                    para obtener más información acerca de la configuración de esta aplicación ASP.NET para admitir la autenticación en dos fases.
-                </p>*@
-                @*@if (Model.TwoFactor)
-                {
-                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Habilitado
-                        <input type="submit" value="Deshabilitar" class="btn btn-link" />
-                        </text>
-                    }
-                }
-                else
-                {
-                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Deshabilitado
-                        <input type="submit" value="Habilitar" class="btn btn-link" />
-                        </text>
-                    }
-                }
-            </dd>*@
-
+                    </div>
+                </div><!-- row -->
             </div>
+
+            @*<dt>Inicios de sesión externos:</dt>
+                <dd>
+                    @Model.Logins.Count [
+                    @Html.ActionLink("Administrar", "ManageLogins") ]
+                </dd>*@
+            @*
+                Los números de teléfono se pueden usar como un segundo factor de comprobación en un sistema de autenticación en dos fases.
+
+                 Consulte <a href="http://go.microsoft.com/fwlink/?LinkId=403804">este artículo</a>
+                    para obtener más información acerca de la configuración de esta aplicación ASP.NET para admitir la autenticación en dos fases con SMS.
+
+                 Quite la marca de comentario del siguiente bloque una vez haya configurado la autenticación en dos fases
+            *@
+            @*
+                <dt>Número de teléfono:</dt>
+                <dd>
+                    @(Model.PhoneNumber ?? "Ninguno") [
+                    @if (Model.PhoneNumber != null)
+                    {
+                        @Html.ActionLink("Cambiar", "AddPhoneNumber")
+                        @: &nbsp;|&nbsp;
+                        @Html.ActionLink("Quitar", "RemovePhoneNumber")
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Agregar", "AddPhoneNumber")
+                    }
+                    ]
+                </dd>
+            *@
+            @*<dt>Autenticación de dos factores:</dt>
+                <dd>
+                    <p>
+                        No hay ningún proveedor de autenticación en dos fases configurado. Consulte <a href="http://go.microsoft.com/fwlink/?LinkId=403804">este artículo</a>
+                        para obtener más información acerca de la configuración de esta aplicación ASP.NET para admitir la autenticación en dos fases.
+                    </p>*@
+            @*@if (Model.TwoFactor)
+                    {
+                        using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <text>Habilitado
+                            <input type="submit" value="Deshabilitar" class="btn btn-link" />
+                            </text>
+                        }
+                    }
+                    else
+                    {
+                        using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <text>Deshabilitado
+                            <input type="submit" value="Habilitar" class="btn btn-link" />
+                            </text>
+                        }
+                    }
+                </dd>*@
+
+        </div>
 
     </div><!-- panel -->
 </div>
