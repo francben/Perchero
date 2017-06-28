@@ -1,0 +1,224 @@
+﻿@model Perchero.Models.TallePrenda
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>TallePrenda</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Prenda.UserId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Prenda.UserId)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Talle.Id)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Talle.Id)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.NUmeroTalle)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.NUmeroTalle)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Busto)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Busto)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Cintura)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Cintura)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Cadera)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Cadera)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AnchoEspalda)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AnchoEspalda)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AnchoTorax)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AnchoTorax)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Hombro)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Hombro)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Cuello)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Cuello)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AlturaBusto)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AlturaBusto)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Pinza)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Pinza)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SeparacionBusto)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SeparacionBusto)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ContornoBrazo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ContornoBrazo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PuñoAjustado)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PuñoAjustado)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PuñoFlojo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PuñoFlojo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TalleEspalda)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TalleEspalda)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TalleDelantero)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TalleDelantero)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AlturaAxila)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AlturaAxila)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AlturaRodilla)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AlturaRodilla)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AlturaCCadera)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AlturaCCadera)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.LargoCinturaSuelo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LargoCinturaSuelo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TiroPaantalonDelantero)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TiroPaantalonDelantero)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.LargoManga)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LargoManga)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

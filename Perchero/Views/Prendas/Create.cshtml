@@ -33,12 +33,29 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="form-group hidden">
-                        <div class="col-md-12">
-                            @Html.HiddenFor(model => model.UserId, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                    @if (User.IsInRole("Diseñador"))
+                    {
+                        <div class="form-group hidden">
+                            <div class="col-md-12">
+                                @Html.HiddenFor(model => model.UserId, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
+                    }
+
+                    @if (User.IsInRole("Cliente"))
+                    {
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.UserId, "Diseñador", htmlAttributes: new { @class = " col-md-12" })
+                                <div class="col-md-12">
+                                    @Html.DropDownList("Userid", null, "Selecionar Diseñador", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+
                     <div class="col-lg-4">
                         <div class="form-group">
                             @Html.LabelFor(model => model.TipoId, "Categoria", htmlAttributes: new { @class = " col-md-12" })
@@ -65,9 +82,17 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Talle, htmlAttributes: new { @class = "col-md-12" })
                             <div class="col-md-12">
-                                @Html.EditorFor(model => model.Talle, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Talle, "", new { @class = "text-danger" })
+
+
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#Tela">
+                                Agregar Talle
+                            </button>
+                            
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -131,7 +156,197 @@
         </div>
     </div>
 }
-
+<div class="modal  fade" id="Tela" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">
+                    Talles
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="lst">Listo</button>
+                    </div>
+                </h4>
+            </div>
+            <div class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4">NumeroTalle</label>
+                            <div class="col-md-8">
+                                <input class="form-control TalleC text-box single-line valid" id="TalleI" type="text" value="" autocomplete="off" placeholder="Buscar" />
+                                <input class="form-control" id="TalleId" name="TalleId" value="" type="text" />
+                                @*<input class="form-control text-box single-line" data-val="true" data-val-number="El campo NumeroTalle debe ser un número." data-val-required="El campo NumeroTalle es obligatorio." id="NumeroTalle" name="NumeroTalle" type="number" value="" />*@
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="Busto">Busto</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo Busto debe ser un número." data-val-required="El campo Busto es obligatorio." id="Busto" name="Busto" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="Busto" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="LargoManga">LargoManga</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo LargoManga debe ser un número." data-val-required="El campo LargoManga es obligatorio." id="LargoManga" name="LargoManga" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="LargoManga" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="Cintura">Cintura</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo Cintura debe ser un número." data-val-required="El campo Cintura es obligatorio." id="Cintura" name="Cintura" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="Cintura" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="Cadera">Cadera</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo Cadera debe ser un número." data-val-required="El campo Cadera es obligatorio." id="Cadera" name="Cadera" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="Cadera" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="AnchoEspalda">AnchoEspalda</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo AnchoEspalda debe ser un número." data-val-required="El campo AnchoEspalda es obligatorio." id="AnchoEspalda" name="AnchoEspalda" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="AnchoEspalda" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="AnchoTorax">AnchoTorax</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo AnchoTorax debe ser un número." data-val-required="El campo AnchoTorax es obligatorio." id="AnchoTorax" name="AnchoTorax" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="AnchoTorax" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="Hombro">Hombro</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo Hombro debe ser un número." data-val-required="El campo Hombro es obligatorio." id="Hombro" name="Hombro" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="Hombro" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="Cuello">Cuello</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo Cuello debe ser un número." data-val-required="El campo Cuello es obligatorio." id="Cuello" name="Cuello" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="Cuello" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="AlturaBusto">AlturaBusto</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo AlturaBusto debe ser un número." data-val-required="El campo AlturaBusto es obligatorio." id="AlturaBusto" name="AlturaBusto" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="AlturaBusto" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="Pinza">Pinza</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo Pinza debe ser un número." data-val-required="El campo Pinza es obligatorio." id="Pinza" name="Pinza" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="Pinza" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="SeparacionBusto">SeparacionBusto</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo SeparacionBusto debe ser un número." data-val-required="El campo SeparacionBusto es obligatorio." id="SeparacionBusto" name="SeparacionBusto" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="SeparacionBusto" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="ContornoBrazo">ContornoBrazo</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo ContornoBrazo debe ser un número." data-val-required="El campo ContornoBrazo es obligatorio." id="ContornoBrazo" name="ContornoBrazo" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="ContornoBrazo" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="Pu_oAjustado">Pu&#241;oAjustado</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo PuñoAjustado debe ser un número." data-val-required="El campo PuñoAjustado es obligatorio." id="Pu_oAjustado" name="PuñoAjustado" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="PuñoAjustado" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="Pu_oFlojo">Pu&#241;oFlojo</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo PuñoFlojo debe ser un número." data-val-required="El campo PuñoFlojo es obligatorio." id="Pu_oFlojo" name="PuñoFlojo" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="PuñoFlojo" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="TalleEspalda">TalleEspalda</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo TalleEspalda debe ser un número." data-val-required="El campo TalleEspalda es obligatorio." id="TalleEspalda" name="TalleEspalda" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="TalleEspalda" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="TalleDelantero">TalleDelantero</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo TalleDelantero debe ser un número." data-val-required="El campo TalleDelantero es obligatorio." id="TalleDelantero" name="TalleDelantero" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="TalleDelantero" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="AlturaAxila">AlturaAxila</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo AlturaAxila debe ser un número." data-val-required="El campo AlturaAxila es obligatorio." id="AlturaAxila" name="AlturaAxila" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="AlturaAxila" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="AlturaRodilla">AlturaRodilla</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo AlturaRodilla debe ser un número." data-val-required="El campo AlturaRodilla es obligatorio." id="AlturaRodilla" name="AlturaRodilla" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="AlturaRodilla" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="AlturaCCadera">AlturaCCadera</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo AlturaCCadera debe ser un número." data-val-required="El campo AlturaCCadera es obligatorio." id="AlturaCCadera" name="AlturaCCadera" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="AlturaCCadera" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="LargoCinturaSuelo">LargoCinturaSuelo</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo LargoCinturaSuelo debe ser un número." data-val-required="El campo LargoCinturaSuelo es obligatorio." id="LargoCinturaSuelo" name="LargoCinturaSuelo" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="LargoCinturaSuelo" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="control-label col-md-4" for="TiroPaantalonDelantero">TiroPaantalonDelantero</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="El campo TiroPaantalonDelantero debe ser un número." data-val-required="El campo TiroPaantalonDelantero es obligatorio." id="TiroPaantalonDelantero" name="TiroPaantalonDelantero" type="number" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="TiroPaantalonDelantero" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="border:none;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -150,6 +365,32 @@
                 minFormsCount: 0,
                 iniFormsCount: 1
             });
+
+
+            cargar_talle();
+            function cargar_talle() {
+                console.log("hola")
+                var codigoTalle = {
+                    url: "/Talles/getTalles",
+                    getValue: "NumeroTalle",
+                    list: {
+                        onSelectItemEvent: function () {
+                            var TalleId = $(".TalleC").getSelectedItemData().Id;
+                            $("#TalleId").val(TalleId).trigger("change");
+                            var AlturaAxila = $(".TalleC").getSelectedItemData().AlturaAxila;
+                            $("#AlturaAxila").val(AlturaAxila)
+
+                        },
+                    },
+                    theme: "plate-dark"
+                    //theme: "square"
+                    //theme: "round"
+                };
+                $("#TalleI").easyAutocomplete(codigoTalle);
+                $(".easy-autocomplete-container").addClass("text-danger");
+
+            };
+
 
             cargar_tipo();
             function cargar_tipo() {
@@ -182,6 +423,8 @@
 
 
 
+
+
             var precioTotal = 0;
             var telas = 0;
             var canttela = [];
@@ -211,42 +454,6 @@
                 cnt -= 1;
                 cd -= 1;
             });
-
-            //cargar_tela();
-
-            function cargar_tela() {
-                //console.log(cd);
-                var codigoTela = {
-                    url: "/Telas/getTelas",
-                    getValue: "Nombre",
-                    list: {
-                        match: {
-                            enabled: true
-                        },
-                        maxNumberOfElements: 8,
-                        sort: {
-                            enabled: true
-                        },
-                        onSelectItemEvent: function () {
-                            console.log(cd);
-                            //for (var i = 0; i < cnt; i++) {
-                            var TelaId = $(".sheepItForm_" + cd + "_tela").getSelectedItemData().Id;
-                            console.log(TelaId);
-                            $("#TelaId").val(TelaId).trigger("change");
-                            var precio = $(".sheepItForm_" + cd + "_tela").getSelectedItemData().Precio;
-                            console.log(precio);
-                            //}
-                        },
-                    },
-                    theme: "plate-dark"
-                    //theme: "square"
-                    //theme: "round"
-                };
-                $("#sheepItForm_" + cd + "_tela").easyAutocomplete(codigoTela);
-                $(".easy-autocomplete-container").addClass("text-danger");
-                //setTimeout(cargar_tela, 50);
-            };
-
 
         });
     </script>

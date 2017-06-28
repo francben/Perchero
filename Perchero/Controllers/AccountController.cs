@@ -432,7 +432,11 @@ namespace Perchero.Controllers
                 aCookie.Expires = DateTime.Now.AddDays(-1);
                 Response.Cookies.Add(aCookie);
             }
-            HttpContext.Request.Cookies["Cook"].Expires = DateTime.Now.AddDays(-1);
+            if (HttpContext.Request.Cookies["Cook"] != null)
+            {
+                HttpContext.Request.Cookies["Cook"].Expires = DateTime.Now.AddDays(-1);
+            }
+            
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             Session.Abandon();
             Session.RemoveAll();

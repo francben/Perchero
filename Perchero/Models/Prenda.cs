@@ -13,6 +13,7 @@ namespace Perchero.Models
         public Prenda()
         {
             DetallePrendas = new List<DetallePrenda>();
+            TallePrendas = new List<TallePrenda>();
         }
         [HiddenInput(DisplayValue = true)]
         public int Id { get; set; }
@@ -32,6 +33,7 @@ namespace Perchero.Models
         public Boolean Vitrina { get; set; }
         public int PrecioTotal { get; set; }
         public virtual ICollection<DetallePrenda> DetallePrendas { get; set; }
+        public virtual ICollection<TallePrenda> TallePrendas { get; set; }
 
     }
 }

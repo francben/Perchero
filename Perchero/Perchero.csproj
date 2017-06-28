@@ -166,6 +166,8 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PedidoesController.cs" />
     <Compile Include="Controllers\PrendasController.cs" />
+    <Compile Include="Controllers\TallePrendasController.cs" />
+    <Compile Include="Controllers\TallesController.cs" />
     <Compile Include="Controllers\TelasController.cs" />
     <Compile Include="Controllers\TiposController.cs" />
     <Compile Include="Global.asax.cs">
@@ -211,6 +213,14 @@
     <Compile Include="Migrations\201706142340036_Borrado_logico_pedido_bolean.Designer.cs">
       <DependentUpon>201706142340036_Borrado_logico_pedido_bolean.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706272022275_Talle.cs" />
+    <Compile Include="Migrations\201706272022275_Talle.Designer.cs">
+      <DependentUpon>201706272022275_Talle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706272033285_relacionTallePrenda.cs" />
+    <Compile Include="Migrations\201706272033285_relacionTallePrenda.Designer.cs">
+      <DependentUpon>201706272033285_relacionTallePrenda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Avio.cs" />
@@ -221,6 +231,8 @@
     <Compile Include="Models\PedidosMes.cs" />
     <Compile Include="Models\PedidosMesViewModel.cs" />
     <Compile Include="Models\Prenda.cs" />
+    <Compile Include="Models\Talle.cs" />
+    <Compile Include="Models\TallePrenda.cs" />
     <Compile Include="Models\Tela.cs" />
     <Compile Include="Models\Tipo.cs" />
     <Compile Include="Models\UploadFilesResult.cs" />
@@ -338,6 +350,16 @@
     <Content Include="Views\Pedidoes\NotificacionEntrantes.cshtml" />
     <Content Include="Views\Pedidoes\NotificacionEntrantesHome.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
+    <Content Include="Views\Talles\Create.cshtml" />
+    <Content Include="Views\Talles\Delete.cshtml" />
+    <Content Include="Views\Talles\Details.cshtml" />
+    <Content Include="Views\Talles\Edit.cshtml" />
+    <Content Include="Views\Talles\Index.cshtml" />
+    <Content Include="Views\TallePrendas\Create.cshtml" />
+    <Content Include="Views\TallePrendas\Delete.cshtml" />
+    <Content Include="Views\TallePrendas\Details.cshtml" />
+    <Content Include="Views\TallePrendas\Edit.cshtml" />
+    <Content Include="Views\TallePrendas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -381,6 +403,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706142340036_Borrado_logico_pedido_bolean.resx">
       <DependentUpon>201706142340036_Borrado_logico_pedido_bolean.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706272022275_Talle.resx">
+      <DependentUpon>201706272022275_Talle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706272033285_relacionTallePrenda.resx">
+      <DependentUpon>201706272033285_relacionTallePrenda.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

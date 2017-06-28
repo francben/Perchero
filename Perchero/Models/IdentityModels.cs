@@ -57,5 +57,9 @@ namespace Perchero.Models
         public System.Data.Entity.DbSet<Perchero.Models.DetallePrenda> DetallePrendas { get; set; }
 
         public System.Data.Entity.DbSet<Perchero.Models.Pedido> Pedidoes { get; set; }
+
+        public System.Data.Entity.DbSet<Perchero.Models.Talle> Talles { get; set; }
+
+        public System.Data.Entity.DbSet<Perchero.Models.TallePrenda> TallePrendas { get; set; }
     }
 }

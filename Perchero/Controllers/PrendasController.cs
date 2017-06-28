@@ -114,15 +114,21 @@ namespace Perchero.Controllers
         // GET: Prendas/Create
         public ActionResult Create()
         {
-            var UserId = User.Identity.GetUserId();
             Prenda prenda = new Prenda();
-            prenda.UserId = UserId;
+            var UserId = "";
+            if (User.IsInRole("Diseñador"))
+            {
+                UserId = User.Identity.GetUserId();
+                prenda.UserId = UserId;
+            }
 
             ViewBag.TipoId = new SelectList(db.Tipoes, "Id", "Categoria");
             ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre");
             ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId");
             ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre", prenda.UserId);
             return View(prenda);
+                        
         }
 
         // POST: Prendas/Create
