@@ -49,7 +49,7 @@ namespace Perchero.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TalleId,PrendaId,NUmeroTalle,Busto,Cintura,Cadera,AnchoEspalda,AnchoTorax,Hombro,Cuello,AlturaBusto,Pinza,SeparacionBusto,ContornoBrazo,PuñoAjustado,PuñoFlojo,TalleEspalda,TalleDelantero,AlturaAxila,AlturaRodilla,AlturaCCadera,LargoCinturaSuelo,TiroPaantalonDelantero,LargoManga")] TallePrenda tallePrenda)
+        public ActionResult Create([Bind(Include = "Id,TalleId,PrendaId,NUmeroTalle,Busto,Cintura,Cadera,AnchoEspalda,AnchoTorax,Hombro,Cuello,AlturaBusto,Pinza,SeparacionBusto,ContornoBrazo,PunhoAjustado,PunhoFlojo,TalleEspalda,TalleDelantero,AlturaAxila,AlturaRodilla,AlturaCCadera,LargoCinturaSuelo,TiroPaantalonDelantero,LargoManga")] TallePrenda tallePrenda)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Perchero.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TalleId,PrendaId,NUmeroTalle,Busto,Cintura,Cadera,AnchoEspalda,AnchoTorax,Hombro,Cuello,AlturaBusto,Pinza,SeparacionBusto,ContornoBrazo,PuñoAjustado,PuñoFlojo,TalleEspalda,TalleDelantero,AlturaAxila,AlturaRodilla,AlturaCCadera,LargoCinturaSuelo,TiroPaantalonDelantero,LargoManga")] TallePrenda tallePrenda)
+        public ActionResult Edit([Bind(Include = "Id,TalleId,PrendaId,NUmeroTalle,Busto,Cintura,Cadera,AnchoEspalda,AnchoTorax,Hombro,Cuello,AlturaBusto,Pinza,SeparacionBusto,ContornoBrazo,PunhoAjustado,PunhoFlojo,TalleEspalda,TalleDelantero,AlturaAxila,AlturaRodilla,AlturaCCadera,LargoCinturaSuelo,TiroPaantalonDelantero,LargoManga")] TallePrenda tallePrenda)
         {
             if (ModelState.IsValid)
             {

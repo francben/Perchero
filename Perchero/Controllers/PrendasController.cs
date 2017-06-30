@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Perchero.Models;
 using System.Drawing;
 using System.Drawing.Imaging;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
 using System.IO;
 
@@ -17,6 +18,36 @@ namespace Perchero.Controllers
     public class PrendasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _roleManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ??
+                    HttpContext.GetOwinContext()
+                    .GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ??
+                    HttpContext.GetOwinContext()
+                    .GetUserManager<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
 
         //get
         public ActionResult Calcular()
@@ -122,11 +153,14 @@ namespace Perchero.Controllers
                 prenda.UserId = UserId;
             }
 
+            var rol = db.Roles.Where(x => x.Name == "Diseñador").FirstOrDefault();
+            var usuarios = db.Users.Where(u => u.Roles.Any(y => y.RoleId == rol.Id));
+
             ViewBag.TipoId = new SelectList(db.Tipoes, "Id", "Categoria");
             ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre");
             ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId");
             ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre");
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Nombre", prenda.UserId);
+            ViewBag.UserId = new SelectList(usuarios, "Id", "Nombre", prenda.UserId);
             return View(prenda);
                         
         }

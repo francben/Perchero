@@ -221,6 +221,14 @@
     <Compile Include="Migrations\201706272033285_relacionTallePrenda.Designer.cs">
       <DependentUpon>201706272033285_relacionTallePrenda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706282203461_varaible_punho_jeje.cs" />
+    <Compile Include="Migrations\201706282203461_varaible_punho_jeje.Designer.cs">
+      <DependentUpon>201706282203461_varaible_punho_jeje.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706290307364_varaible_punho_jeje_talleprenda.cs" />
+    <Compile Include="Migrations\201706290307364_varaible_punho_jeje_talleprenda.Designer.cs">
+      <DependentUpon>201706290307364_varaible_punho_jeje_talleprenda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Avio.cs" />
@@ -409,6 +417,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706272033285_relacionTallePrenda.resx">
       <DependentUpon>201706272033285_relacionTallePrenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706282203461_varaible_punho_jeje.resx">
+      <DependentUpon>201706282203461_varaible_punho_jeje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706290307364_varaible_punho_jeje_talleprenda.resx">
+      <DependentUpon>201706290307364_varaible_punho_jeje_talleprenda.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

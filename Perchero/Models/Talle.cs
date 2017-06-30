@@ -26,8 +26,8 @@ namespace Perchero.Models
         public int Pinza { get; set; }
         public int SeparacionBusto { get; set; }
         public int ContornoBrazo { get; set; }
-        public int PuñoAjustado { get; set; }
-        public int PuñoFlojo { get; set; }
+        public int PunhoAjustado { get; set; }
+        public int PunhoFlojo { get; set; }
         public int TalleEspalda { get; set; }
         public int TalleDelantero { get; set; }
         public int AlturaAxila { get; set; }
