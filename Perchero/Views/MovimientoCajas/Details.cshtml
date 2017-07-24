@@ -1,0 +1,74 @@
+﻿@model Perchero.Models.MovimientoCaja
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MovimientoCaja</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Caja.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Caja.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Concepto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Concepto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Movimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Movimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ingreso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ingreso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Egreso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Egreso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Saldo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Saldo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

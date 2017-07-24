@@ -8,10 +8,10 @@ namespace Perchero.Models
 {
     public class Talle
     {
-        public Talle()
-        {
-            TallePrendas = new List<TallePrenda>();
-        }
+        //public Talle()
+        //{
+        //    TallePrendas = new List<TallePrenda>();
+        //}
         [HiddenInput(DisplayValue = true)]
         public int Id { get; set; }
         public int NumeroTalle { get; set; }
@@ -36,6 +36,6 @@ namespace Perchero.Models
         public int LargoCinturaSuelo { get; set; }
         public int TiroPaantalonDelantero { get; set; }
         public int LargoManga { get; set; }
-        public virtual ICollection<TallePrenda> TallePrendas { get; set; }
+        //public virtual ICollection<TallePrenda> TallePrendas { get; set; }
     }
 }

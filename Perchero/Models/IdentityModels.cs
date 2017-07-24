@@ -61,5 +61,9 @@ namespace Perchero.Models
         public System.Data.Entity.DbSet<Perchero.Models.Talle> Talles { get; set; }
 
         public System.Data.Entity.DbSet<Perchero.Models.TallePrenda> TallePrendas { get; set; }
+
+        public System.Data.Entity.DbSet<Perchero.Models.Caja> Cajas { get; set; }
+
+        public System.Data.Entity.DbSet<Perchero.Models.MovimientoCaja> MovimientoCajas { get; set; }
     }
 }

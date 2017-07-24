@@ -12,7 +12,15 @@
             <li>
                 <a href="@Url.Action("Index", "Home")"><i class="fa fa-home mr5"></i>Inicio</a>
             </li>
-            <li><a href="@Url.Action("Index", "Prendas")">Prenda</a></li>
+            <li>
+                @if (User.IsInRole("Diseñador"))
+                {
+                    <a href="@Url.Action("Index","Prendas")">Prendas</a>}
+                else
+                {
+                    <a href="">Prendas</a>}
+            </li>
+
             <li class="active">Crear Prenda</li>
         </ol>
 
@@ -21,7 +29,7 @@
                 <h4 class="panel-title">
                     Nueva prenda
                     <div class="pull-right">
-                        @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-default btn-xs" })
+                        @Html.ActionLink("Volver", "Create", null, new { @class = "btn btn-default btn-xs" })
                     </div>
                 </h4>
                 <p></p>
@@ -32,7 +40,7 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 @Html.HiddenFor(model => model.UserId, new { @class = "form-control" })
-                                @Html.HiddenFor(model => model.Talle, new { @class = "form-control" })
+                                @*@Html.HiddenFor(model => model.Talle, new { @class = "form-control" })*@
                                 @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -264,8 +272,8 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             @Html.LabelFor(model => model.PrecioTotal, htmlAttributes: new { @class = "col-md-12" })
-                            <div class="col-md-12">
-                                @Html.EditorFor(model => model.PrecioTotal, new { htmlAttributes = new { @class = "form-control" } })
+                            <div class="col-md-12" id="VistaPrecio" style="font-size:25px;">
+                                @Html.HiddenFor(model => model.PrecioTotal, new { htmlAttributes = new { @class = "form-control"} })
                                 @Html.ValidationMessageFor(model => model.PrecioTotal, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -274,7 +282,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Imagen, htmlAttributes: new { @class = "col-md-12" })
                             <div class="col-md-12">
-                                @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "", @type = "file" } })
+                                @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "file-loading", @type = "file" } })
                                 @Html.ValidationMessageFor(model => model.Imagen, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -325,17 +333,31 @@
                                 </thead>
                                 <tbody>
                                     @{
-                                        var i = 0;
-                                        foreach (var item in Model.DetallePrendas)
-                                        {
-                                            <tr>
-                                                <td>@item.Tela.Nombre  <input type="hidden" name="DetallePrendas[@i].TelaId" value="@item.TelaId" /></td>
-                                                <td>@item.MetroTela <input type="hidden" name="DetallePrendas[@i].MetroTela" value="@item.MetroTela" /> </td>
-                                                <td>@item.Avio.Nombre <input type="hidden" name="DetallePrendas[@i].AvioId" value="@item.AvioId" /></td>
-                                                <td>@item.CantidadAvio <input type="hidden" name="DetallePrendas[@i].CantidadAvio" value="@item.CantidadAvio" /></td>
-                                            </tr>
-                                            i++;
-                                        }
+                var i = 0;
+                foreach (var item in Model.DetallePrendas)
+                {
+                    <tr>
+                        @if (item.Tela != null)
+                        {
+                            <td>@item.Tela.Nombre @item.Tela.Color <input type="hidden" name="DetallePrendas[@i].TelaId" value="@item.TelaId" /></td>
+                            <td>@item.MetroTela <input type="hidden" name="DetallePrendas[@i].MetroTela" value="@item.MetroTela" /> </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                        @if (item.Avio != null)
+                        {
+                            <td>@item.Avio.Nombre <input type="hidden" name="DetallePrendas[@i].AvioId" value="@item.AvioId" /></td>
+                            <td>@item.CantidadAvio <input type="hidden" name="DetallePrendas[@i].CantidadAvio" value="@item.CantidadAvio" /></td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                        i++;
+                }
                                     }
                                 </tbody>
                             </table>
@@ -349,76 +371,100 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script>
-    $(function () {
-        cargar_talle();
-        function cargar_talle() {
-            console.log("hola")
-            var codigoTalle = {
-                url: "/Talles/getTalles",
-                getValue: "NumeroTalle",
-                list: {
-                    onSelectItemEvent: function () {
-                        var TalleId = $(".TalleC").getSelectedItemData().Id;
-                        $("#TalleId").val(TalleId).trigger("change");
-                        var NumeroTalle = $(".TalleC").getSelectedItemData().NumeroTalle;
-                        $("#NumeroTalle").val(NumeroTalle)
-                        $("#Talle").val(NumeroTalle)
-                        var AlturaAxila = $(".TalleC").getSelectedItemData().NumeroTalle;
-                        $("#AlturaAxila").val(AlturaAxila)
-                        var AlturaBusto = $(".TalleC").getSelectedItemData().AlturaBusto;
-                        $("#AlturaBusto").val(AlturaBusto)
-                        var AlturaCCadera = $(".TalleC").getSelectedItemData().AlturaCCadera;
-                        $("#AlturaCCadera").val(AlturaCCadera)
-                        var AlturaRodilla = $(".TalleC").getSelectedItemData().AlturaRodilla;
-                        $("#AlturaRodilla").val(AlturaRodilla)
-                        var AnchoEspalda = $(".TalleC").getSelectedItemData().AnchoEspalda;
-                        $("#AnchoEspalda").val(AnchoEspalda)
-                        var AnchoTorax = $(".TalleC").getSelectedItemData().AnchoTorax;
-                        $("#AnchoTorax").val(AnchoTorax)
-                        var Busto = $(".TalleC").getSelectedItemData().Busto;
-                        $("#Busto").val(Busto)
-                        var Cadera = $(".TalleC").getSelectedItemData().Cadera;
-                        $("#Cadera").val(Cadera)
-                        var Cintura = $(".TalleC").getSelectedItemData().Cintura;
-                        $("#Cintura").val(Cintura)
-                        var ContornoBrazo = $(".TalleC").getSelectedItemData().ContornoBrazo;
-                        $("#ContornoBrazo").val(ContornoBrazo)
-                        var Cuello = $(".TalleC").getSelectedItemData().Cuello;
-                        $("#Cuello").val(Cuello)
-                        var Hombro = $(".TalleC").getSelectedItemData().Hombro;
-                        $("#Hombro").val(Hombro)
-                        var LargoCinturaSuelo = $(".TalleC").getSelectedItemData().LargoCinturaSuelo;
-                        $("#LargoCinturaSuelo").val(LargoCinturaSuelo)
-                        var LargoManga = $(".TalleC").getSelectedItemData().LargoManga;
-                        $("#LargoManga").val(LargoManga)
-                        var Pinza = $(".TalleC").getSelectedItemData().Pinza;
-                        $("#Pinza").val(Pinza)
-                        var PunhoAjustado = $(".TalleC").getSelectedItemData().PunhoAjustado;
-                        $("#PunhoAjustado").val(PunhoAjustado)
-                        var PunhoFlojo = $(".TalleC").getSelectedItemData().PunhoFlojo;
-                        $("#PunhoFlojo").val(PunhoFlojo)
-                        var SeparacionBusto = $(".TalleC").getSelectedItemData().SeparacionBusto;
-                        $("#SeparacionBusto").val(SeparacionBusto)
-                        var TalleDelantero = $(".TalleC").getSelectedItemData().TalleDelantero;
-                        $("#TalleDelantero").val(TalleDelantero)
-                        var TalleEspalda = $(".TalleC").getSelectedItemData().TalleEspalda;
-                        $("#TalleEspalda").val(TalleEspalda)
-                        var TallePrendas = $(".TalleC").getSelectedItemData().TallePrendas;
-                        $("#TallePrendas").val(TallePrendas)
-                        var TiroPaantalonDelantero = $(".TalleC").getSelectedItemData().TiroPaantalonDelantero;
-                        $("#TiroPaantalonDelantero").val(TiroPaantalonDelantero)
+    <script>
+        $(function () {
+            //////
+            var to = 0;
+            var tt = 0;
+            var temp = [];
+            var Tprecio="";
+            var Pprecio = $("#PrecioTotal").val();
+            to = Pprecio.length;
+            tt = to;
+            for (var i = 0; i < to; i++) {
+                temp[tt] = Pprecio[i];
+                if(i==2){
+                    tt-=1
+                    temp[tt]="."
+                }
+                tt -= 1;
+            }
+            for (var i = 0; i < temp.length; i++) {
+                Tprecio = Tprecio + temp[to];
+                to -= 1
+            }
+            $("#VistaPrecio").text("Gs." + Tprecio);
+
+            ////
+            $("#Imagen").fileinput({ showCaption: false, showUpload: false, mainClass: "input-group-lg" });
+
+            cargar_talle();
+            function cargar_talle() {
+                var codigoTalle = {
+                    url: "/Talles/getTalles",
+                    getValue: "NumeroTalle",
+                    list: {
+                        onSelectItemEvent: function () {
+                            var TalleId = $(".TalleC").getSelectedItemData().Id;
+                            $("#TalleId").val(TalleId).trigger("change");
+                            var NumeroTalle = $(".TalleC").getSelectedItemData().NumeroTalle;
+                            $("#NumeroTalle").val(NumeroTalle)
+                            //$("#Talle").val(NumeroTalle)
+                            var AlturaAxila = $(".TalleC").getSelectedItemData().NumeroTalle;
+                            $("#AlturaAxila").val(AlturaAxila)
+                            var AlturaBusto = $(".TalleC").getSelectedItemData().AlturaBusto;
+                            $("#AlturaBusto").val(AlturaBusto)
+                            var AlturaCCadera = $(".TalleC").getSelectedItemData().AlturaCCadera;
+                            $("#AlturaCCadera").val(AlturaCCadera)
+                            var AlturaRodilla = $(".TalleC").getSelectedItemData().AlturaRodilla;
+                            $("#AlturaRodilla").val(AlturaRodilla)
+                            var AnchoEspalda = $(".TalleC").getSelectedItemData().AnchoEspalda;
+                            $("#AnchoEspalda").val(AnchoEspalda)
+                            var AnchoTorax = $(".TalleC").getSelectedItemData().AnchoTorax;
+                            $("#AnchoTorax").val(AnchoTorax)
+                            var Busto = $(".TalleC").getSelectedItemData().Busto;
+                            $("#Busto").val(Busto)
+                            var Cadera = $(".TalleC").getSelectedItemData().Cadera;
+                            $("#Cadera").val(Cadera)
+                            var Cintura = $(".TalleC").getSelectedItemData().Cintura;
+                            $("#Cintura").val(Cintura)
+                            var ContornoBrazo = $(".TalleC").getSelectedItemData().ContornoBrazo;
+                            $("#ContornoBrazo").val(ContornoBrazo)
+                            var Cuello = $(".TalleC").getSelectedItemData().Cuello;
+                            $("#Cuello").val(Cuello)
+                            var Hombro = $(".TalleC").getSelectedItemData().Hombro;
+                            $("#Hombro").val(Hombro)
+                            var LargoCinturaSuelo = $(".TalleC").getSelectedItemData().LargoCinturaSuelo;
+                            $("#LargoCinturaSuelo").val(LargoCinturaSuelo)
+                            var LargoManga = $(".TalleC").getSelectedItemData().LargoManga;
+                            $("#LargoManga").val(LargoManga)
+                            var Pinza = $(".TalleC").getSelectedItemData().Pinza;
+                            $("#Pinza").val(Pinza)
+                            var PunhoAjustado = $(".TalleC").getSelectedItemData().PunhoAjustado;
+                            $("#PunhoAjustado").val(PunhoAjustado)
+                            var PunhoFlojo = $(".TalleC").getSelectedItemData().PunhoFlojo;
+                            $("#PunhoFlojo").val(PunhoFlojo)
+                            var SeparacionBusto = $(".TalleC").getSelectedItemData().SeparacionBusto;
+                            $("#SeparacionBusto").val(SeparacionBusto)
+                            var TalleDelantero = $(".TalleC").getSelectedItemData().TalleDelantero;
+                            $("#TalleDelantero").val(TalleDelantero)
+                            var TalleEspalda = $(".TalleC").getSelectedItemData().TalleEspalda;
+                            $("#TalleEspalda").val(TalleEspalda)
+                            var TallePrendas = $(".TalleC").getSelectedItemData().TallePrendas;
+                            $("#TallePrendas").val(TallePrendas)
+                            var TiroPaantalonDelantero = $(".TalleC").getSelectedItemData().TiroPaantalonDelantero;
+                            $("#TiroPaantalonDelantero").val(TiroPaantalonDelantero)
+                        },
                     },
-                },
-                theme: "plate-dark"
-                //theme: "square"
-                //theme: "round"
+                    theme: "plate-dark"
+                    //theme: "square"
+                    //theme: "round"
+                };
+                $("#TalleI").easyAutocomplete(codigoTalle);
+                $(".easy-autocomplete-container").addClass("text-danger");
+
             };
-            $("#TalleI").easyAutocomplete(codigoTalle);
-            $(".easy-autocomplete-container").addClass("text-danger");
 
-        };
-
-    });
-</script>
+        });
+    </script>
 }

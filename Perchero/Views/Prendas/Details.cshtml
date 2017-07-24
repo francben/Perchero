@@ -37,46 +37,56 @@
 
         <div class="panel-body people-info">
             <div class="row">
-                <div class="col-sm-4">
-                    <div class="info-group">
-                        <label>@Html.DisplayNameFor(model => model.Tipo.Categoria)</label>
-                        @Html.DisplayFor(model => model.Tipo.Categoria)
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="info-group">
-                        <label>@Html.DisplayNameFor(model => model.Usuario.Nombre)</label>
-                        @Html.DisplayFor(model => model.Usuario.Nombre)
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="info-group">
-                        <label>@Html.DisplayNameFor(model => model.Nombre)</label>
-                        @Html.DisplayFor(model => model.Nombre)
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="info-group">
-                        <label>@Html.DisplayNameFor(model => model.Imagen)</label>
-                        @Html.DisplayFor(model => model.Imagen)
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="info-group">
-                        <label>@Html.DisplayNameFor(model => model.Talle)</label>
-                        @Html.DisplayFor(model => model.Talle)
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="info-group">
-                        <label>@Html.DisplayNameFor(model => model.Vitrina)</label>
-                        @Html.DisplayFor(model => model.Vitrina)
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="info-group">
-                        <label>@Html.DisplayNameFor(model => model.PrecioTotal)</label>
-                        @Html.DisplayFor(model => model.PrecioTotal)
+                <div class="col-md-12">
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs nav-primary">
+                        <li class="active">
+                            <a href="#popular5" data-toggle="tab"><strong>@Html.DisplayFor(model => model.Nombre)</strong></a>
+                        </li>
+                        <li>
+                            <a href="#recent5" data-toggle="tab"><strong>@Html.DisplayNameFor(model => model.Talle) @Html.DisplayFor(model => model.Talle)</strong></a>
+                        </li>
+                        <li>
+                            <a href="#comments5" data-toggle="tab"><strong>Comments</strong></a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content mb20">
+                        <div class="tab-pane active" id="popular5">
+                            <div class="col-lg-12">
+                                <div class="col-sm-3">
+                                    <img class="img-frame" width="200" height="280" src="@Url.Content("~/Content/imgprenda/imgprev/"+Model.Imagen+"/"+Model.Imagen+".png")" />
+                                </div>
+                                <div class="info-group">
+                                    <div class="col-sm-3">
+                                        <label>Diseñador</label>
+                                        @Html.DisplayFor(model => model.Usuario.Nombre)
+                                    </div>
+                                    <div class="col-sm-3">
+
+                                        <label>@Html.DisplayNameFor(model => model.Tipo.Categoria)</label>
+                                        @Html.DisplayFor(model => model.Tipo.Categoria)
+                                    </div>
+                                    <div class="col-sm-3">
+
+                                        <label>@Html.DisplayNameFor(model => model.PrecioTotal)</label>
+                                        @Html.DisplayFor(model => model.PrecioTotal)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="recent5">
+                            <div class="info-group">
+                                <label>@Html.DisplayNameFor(model => model.Talle)</label>
+                                @Html.DisplayFor(model => model.Talle)
+                                @Html.ActionLink("Details", "Details", new { id = Model })
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="comments5">
+                            Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
+                        </div>
                     </div>
                 </div>
             </div>

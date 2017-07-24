@@ -16,7 +16,7 @@ namespace Perchero.Controllers
 
         public JsonResult getTalles()
         {
-            var query = from c in db.Talles select new { c.Id, c.NumeroTalle, c.AlturaAxila, c.AlturaBusto, c.AlturaCCadera, c.AlturaRodilla, c.AnchoEspalda, c.AnchoTorax, c.Busto, c.Cadera, c.Cintura, c.ContornoBrazo, c.Cuello, c.Hombro, c.LargoCinturaSuelo, c.LargoManga, c.Pinza, c.PunhoAjustado, c.PunhoFlojo, c.SeparacionBusto, c.TalleDelantero, c.TalleEspalda, c.TallePrendas, c.TiroPaantalonDelantero};
+            var query = from c in db.Talles select new { c.Id, c.NumeroTalle, c.AlturaAxila, c.AlturaBusto, c.AlturaCCadera, c.AlturaRodilla, c.AnchoEspalda, c.AnchoTorax, c.Busto, c.Cadera, c.Cintura, c.ContornoBrazo, c.Cuello, c.Hombro, c.LargoCinturaSuelo, c.LargoManga, c.Pinza, c.PunhoAjustado, c.PunhoFlojo, c.SeparacionBusto, c.TalleDelantero, c.TalleEspalda, c.TiroPaantalonDelantero };
             return Json(query, JsonRequestBehavior.AllowGet);
         }
 
@@ -52,7 +52,7 @@ namespace Perchero.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,NumeroTalle,Busto,Cintura,Cadera,AnchoEspalda,AnchoTorax,Hombro,Cuello,AlturaBusto,Pinza,SeparacionBusto,ContornoBrazo,PunhAjustado,PunhoFlojo,TalleEspalda,TalleDelantero,AlturaAxila,AlturaRodilla,AlturaCCadera,LargoCinturaSuelo,TiroPaantalonDelantero,LargoManga")] Talle talle)
+        public ActionResult Create([Bind(Include = "Id,NumeroTalle,Busto,Cintura,Cadera,AnchoEspalda,AnchoTorax,Hombro,Cuello,AlturaBusto,Pinza,SeparacionBusto,ContornoBrazo,PunhoAjustado,PunhoFlojo,TalleEspalda,TalleDelantero,AlturaAxila,AlturaRodilla,AlturaCCadera,LargoCinturaSuelo,TiroPaantalonDelantero,LargoManga")] Talle talle)
         {
             if (ModelState.IsValid)
             {

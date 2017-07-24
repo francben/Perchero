@@ -29,7 +29,7 @@ namespace Perchero.Models
         [DataType(DataType.ImageUrl)]
         public string Imagen { get; set; }
         [Required(ErrorMessage = "Este campo es requerido")]
-        public int Talle { get; set; }
+        //public int Talle { get; set; }
         public Boolean Vitrina { get; set; }
         public int PrecioTotal { get; set; }
         public virtual ICollection<DetallePrenda> DetallePrendas { get; set; }

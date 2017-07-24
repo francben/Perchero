@@ -9,7 +9,14 @@
         <li>
             <a href="@Url.Action("Index","Home")"><i class="fa fa-home mr5"></i> Inicio</a>
         </li>
-        <li><a href="@Url.Action("Index","Prendas")">Prendas</a></li>
+        <li>
+            @if (User.IsInRole("Diseñador"))
+            {
+                <a href="@Url.Action("Index","Prendas")">Prendas</a>}
+            else
+            {
+                <a href="">Prendas</a>}
+        </li>
         <li class="active">Galeria de prendas   </li>
     </ol>
     <div class="panel panel-primary">
@@ -17,7 +24,7 @@
             <h4 class="panel-title">
                 @ViewBag.Title
                 <div class="pull-right">
-                    @Html.ActionLink("Crear nuevo", "Create", null, new { @class = "btn btn-default btn-xs" })
+                    @Html.ActionLink("Crear Pedido", "Create", null, new { @class = "btn btn-default btn-xs" })
                 </div>
             </h4>
             <p></p>
@@ -64,7 +71,7 @@
                                         <li>
                                             <a href="@Url.Action("Pedido", "Pedidoes", new {PrendaId = item.Id})"><i class="fa fa-share"></i> Seleccionar</a>
                                         </li>
-                                    }   
+                                    }
                                     <li>
                                         <a href="@Url.Action("Details", "Prendas", new { id = item.Id })"><i class="fa fa-eye"></i> Detalles</a>
                                     </li>
@@ -79,7 +86,9 @@
                             <div class="thmb-prev" style="height:300px;">
                                 <center><img style="vertical-align:middle;" src="@Url.Content("~/Content/imgprenda/imgori/" + item.Imagen + "/" + item.Imagen + ".png")" class="img-responsive" alt="" /></center>
                             </div>
-                            <h5 class="fm-title"><a href="">@Html.DisplayFor(modelItem => item.Nombre)</a></h5>
+                            <h5 class="fm-title">
+                                <a href="@Url.Action("Details", "Prendas", new { id = item.Id })"><i class="fa fa-eye"></i>@Html.DisplayFor(modelItem => item.Nombre)</a>
+                            </h5>
                             <small class="text-muted">Diseñador: @Html.DisplayFor(modelItem => item.Usuario.Nombre)</small>
                             <br />
                             <small class="text-muted">Precio: @Html.DisplayFor(modelItem => item.PrecioTotal)</small>

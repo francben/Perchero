@@ -97,10 +97,18 @@ namespace Perchero.Controllers
             {
                 Tela tela = db.Telas.Find(item.TelaId);
                 Avio avio = db.Avios.Find(item.AvioId);
-                preciotela += tela.Precio * (int)item.MetroTela;
-                precioavio += avio.Precio * item.CantidadAvio;
-                item.Avio = avio;
-                item.Tela = tela;
+                if (tela != null)
+                {
+                    preciotela += tela.Precio * (int)item.MetroTela;
+                    item.Tela = tela;
+                }
+                if (avio != null)
+                {
+                    precioavio += avio.Precio * item.CantidadAvio;
+                    item.Avio = avio;
+                }
+                
+                
             }
             precioprenda = manoobra + preciotela + precioavio;
             prenda.PrecioTotal = precioprenda;
@@ -111,6 +119,7 @@ namespace Perchero.Controllers
             ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre");
             //return precioprenda;
             return View(prenda);
+
         }
 
 
@@ -182,6 +191,10 @@ namespace Perchero.Controllers
                     var nombrearchivo = CrearImagen(Imagen, prenda);
                     CrearMiniatura(Imagen, prenda);
                 }
+                if (User.IsInRole("Cliente"))
+                {
+                    return RedirectToAction("Pedido", "Pedidoes", new { PrendaId = prenda.Id });
+                }
                 return RedirectToAction("Index");
             }
 
@@ -190,7 +203,9 @@ namespace Perchero.Controllers
 
             ViewBag.AvioId = new SelectList(db.Avios, "Id", "Nombre");
             ViewBag.PrendaId = new SelectList(db.Prendas, "Id", "UserId");
-            ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre");
+            ViewBag.TelaId = new SelectList(db.Telas, "Id", "Nombre", "Color");
+
+            
             return View(prenda);
         }
 

@@ -1,0 +1,90 @@
+﻿@model Perchero.Models.Caja
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Caja</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_Apertura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_Apertura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inicial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inicial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_Cierre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_Cierre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Entrada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Entrada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Salida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cierre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cierre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Operaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Operaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

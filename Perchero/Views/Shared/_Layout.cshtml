@@ -105,13 +105,13 @@
                             <a data-toggle="collapse" data-target="#loguserinfo" class="pull-right"><i class="fa fa-angle-down"></i></a>
                         </h4>
                         @*@if (User.IsInRole("Diseñador"))
-                        {
-                            <span>Diseñador</span>
-                        }
-                        @if (User.IsInRole("Cliente"))
-                        {
-                            <span>Cliente</span>
-                        }*@
+                            {
+                                <span>Diseñador</span>
+                            }
+                            @if (User.IsInRole("Cliente"))
+                            {
+                                <span>Cliente</span>
+                            }*@
                     </div>
                 </div><!-- leftpanel-profile -->
 
@@ -134,13 +134,13 @@
                             <span class="pull-right">@User.Identity.GetUserName()</span>
                         </li>
                         @*<li class="list-group-item">
-                            <label class="pull-left">Home</label>
-                            <span class="pull-right">(032) 1234 567</span>
-                        </li>
-                        <li class="list-group-item">
-                            <label class="pull-left">Mobile</label>
-                            <span class="pull-right">+63012 3456 789</span>
-                        </li>*@
+                                <label class="pull-left">Home</label>
+                                <span class="pull-right">(032) 1234 567</span>
+                            </li>
+                            <li class="list-group-item">
+                                <label class="pull-left">Mobile</label>
+                                <span class="pull-right">+63012 3456 789</span>
+                            </li>*@
                         <li class="list-group-item">
                             <label class="pull-left">Social</label>
                             <div class="social-icons pull-right">
@@ -157,14 +157,14 @@
                         <a data-toggle="tab" data-target="#mainmenu"><i class="tooltips fa fa-ellipsis-h"></i></a>
                     </li>
                     @*<li class="tooltips unread" data-toggle="tooltip" title="Check Mail">
-                        <a data-toggle="tab" data-target="#emailmenu"><i class="tooltips fa fa-envelope"></i></a>
-                    </li>
-                    <li class="tooltips" data-toggle="tooltip" title="Contacts">
-                        <a data-toggle="tab" data-target="#contactmenu"><i class="fa fa-user"></i></a>
-                    </li>
-                    <li class="tooltips" data-toggle="tooltip" title="Settings">
-                        <a data-toggle="tab" data-target="#settings"><i class="fa fa-cog"></i></a>
-                    </li>*@
+                            <a data-toggle="tab" data-target="#emailmenu"><i class="tooltips fa fa-envelope"></i></a>
+                        </li>
+                        <li class="tooltips" data-toggle="tooltip" title="Contacts">
+                            <a data-toggle="tab" data-target="#contactmenu"><i class="fa fa-user"></i></a>
+                        </li>
+                        <li class="tooltips" data-toggle="tooltip" title="Settings">
+                            <a data-toggle="tab" data-target="#settings"><i class="fa fa-cog"></i></a>
+                        </li>*@
                     <li class="tooltips" data-toggle="tooltip" title="Cerrar sesión">
                         <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i></a>
                     </li>
@@ -191,7 +191,7 @@
                             @if (User.IsInRole("Administrador") || User.IsInRole("Diseñador"))
                             {
                                 <li class="nav-parent">
-                                    <a href=""><i class="fa fa-cube"></i> <span>Tipos</span></a>
+                                    <a href=""><i class="fa fa-tags"></i> <span>Tipos</span></a>
                                     <ul class="children">
                                         <li><a href="@Url.Action("Create","Tipos")">Nueva Categoria</a></li>
                                         <li><a href="@Url.Action("Index","TIpos")">Lista de categorias</a></li>
@@ -199,7 +199,7 @@
                                 </li>
                             }
                             <li class="nav-parent">
-                                <a href=""><i class="fa fa-map-marker"></i> <span>Prendas</span></a>
+                                <a href=""><i class="fa fa-female"></i> <span>Prendas</span></a>
                                 <ul class="children">
                                     <li><a href="@Url.Action("Create","Prendas")">Nueva prenda</a></li>
                                     @if (User.IsInRole("Administrador") || User.IsInRole("Diseñador"))
@@ -212,17 +212,31 @@
                             @if (User.IsInRole("Administrador") || User.IsInRole("Diseñador"))
                             {
                                 <li class="nav-parent">
-                                    <a href=""><i class="fa fa-check-square"></i> <span>Telas</span></a>
+                                    <a href=""><i class="glyphicon glyphicon-shopping-cart"></i> <span>Caja</span></a>
+                                    <ul class="children">
+                                        <li><a href="@Url.Action("Create","Cajas")">Nueva Caja</a></li>
+                                        <li><a href="@Url.Action("Index","Cajas")">Lista de Cajas</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-parent">
+                                    <a href=""><i class="fa fa-cut"></i> <span>Telas</span></a>
                                     <ul class="children">
                                         <li><a href="@Url.Action("Create","Telas")">Nueva tela</a></li>
                                         <li><a href="@Url.Action("Index","Telas")">Lista de telas</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-parent">
-                                    <a href=""><i class="glyphicon glyphicon-tower"></i> <span>Avios</span></a>
+                                    <a href=""><i class="glyphicon glyphicon-paperclip"></i> <span>Avios</span></a>
                                     <ul class="children">
                                         <li><a href="@Url.Action("Create","Avios")">Nuevo Avio</a></li>
                                         <li><a href="@Url.Action("Index","Avios")">Lista de Avios</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-parent">
+                                    <a href=""><i class="glyphicon glyphicon-text-height"></i> <span>Talle</span></a>
+                                    <ul class="children">
+                                        <li><a href="@Url.Action("Create","Talles")">Nuevo Talle</a></li>
+                                        <li><a href="@Url.Action("Index","Talles")">Lista de Talles</a></li>
                                     </ul>
                                 </li>
                             }
