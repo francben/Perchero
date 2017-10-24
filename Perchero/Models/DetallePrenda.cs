@@ -15,10 +15,10 @@ namespace Perchero.Models
         public int PrendaId { get; set; }
         [ForeignKey("PrendaId")]
         public virtual Prenda Prenda { get; set; }
-        public int AvioId { get; set; }
+        public int? AvioId { get; set; }
         [ForeignKey("AvioId")]
         public virtual Avio Avio { get; set; }
-        public int TelaId { get; set; }
+        public int? TelaId { get; set; }
         [ForeignKey("TelaId")]
         public virtual Tela Tela { get; set; }
         public Double MetroTela { get; set; }

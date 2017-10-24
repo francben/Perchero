@@ -45,7 +45,7 @@
                             <a href="#popular5" data-toggle="tab"><strong>@Html.DisplayFor(model => model.Nombre)</strong></a>
                         </li>
                         <li>
-                            <a href="#recent5" data-toggle="tab"><strong>@Html.DisplayNameFor(model => model.Talle) @Html.DisplayFor(model => model.Talle)</strong></a>
+                            @*<a href="#recent5" data-toggle="tab"><strong>@Html.DisplayNameFor(model => model.Talle) @Html.DisplayFor(model => model.Talle)</strong></a>*@
                         </li>
                         <li>
                             <a href="#comments5" data-toggle="tab"><strong>Comments</strong></a>
@@ -79,8 +79,8 @@
                         </div>
                         <div class="tab-pane" id="recent5">
                             <div class="info-group">
-                                <label>@Html.DisplayNameFor(model => model.Talle)</label>
-                                @Html.DisplayFor(model => model.Talle)
+                                @*<label>@Html.DisplayNameFor(model => model.Talle)</label>
+                                    @Html.DisplayFor(model => model.Talle)*@
                                 @Html.ActionLink("Details", "Details", new { id = Model })
                             </div>
                         </div>
@@ -118,10 +118,31 @@
                                 foreach (var item in Model.DetallePrendas)
                                 {
                                     <tr>
+                                        @{
+                                    if (item.TelaId != null)
+                                    {
                                         <td>@item.Tela.Nombre</td>
-                                        <td>@item.MetroTela</td>
+                                            <td>@item.MetroTela</td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                            <td></td>
+                                    }
+                                        }
+                                        @{
+                                    if (item.AvioId != null)
+                                    {
                                         <td>@item.Avio.Nombre</td>
-                                        <td>@item.CantidadAvio</td>
+                                            <td>@item.CantidadAvio</td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                            <td></td>
+                                    }
+                                        }
+                                        
                                     </tr>
                                 }
                             }

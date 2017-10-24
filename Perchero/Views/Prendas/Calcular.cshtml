@@ -273,7 +273,9 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.PrecioTotal, htmlAttributes: new { @class = "col-md-12" })
                             <div class="col-md-12" id="VistaPrecio" style="font-size:25px;">
-                                @Html.HiddenFor(model => model.PrecioTotal, new { htmlAttributes = new { @class = "form-control"} })
+                            </div>
+                            <div class="col-md-12 hidden" id="" style="font-size:25px;">
+                                @Html.HiddenFor(model => model.PrecioTotal, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.PrecioTotal, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -345,6 +347,7 @@
                         else
                         {
                             <td></td>
+                            <td></td>
                         }
                         @if (item.Avio != null)
                         {
@@ -353,6 +356,7 @@
                         }
                         else
                         {
+                            <td></td>
                             <td></td>
                         }
                     </tr>
@@ -377,15 +381,15 @@
             var to = 0;
             var tt = 0;
             var temp = [];
-            var Tprecio="";
+            var Tprecio = "";
             var Pprecio = $("#PrecioTotal").val();
             to = Pprecio.length;
             tt = to;
             for (var i = 0; i < to; i++) {
                 temp[tt] = Pprecio[i];
-                if(i==2){
-                    tt-=1
-                    temp[tt]="."
+                if (i == 2) {
+                    tt -= 1
+                    temp[tt] = "."
                 }
                 tt -= 1;
             }
